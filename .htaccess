@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect to qr_scan.php with the id parameter
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^qr_scan\.php\?id=(.*)$ qr_scan.php?id=$1 [L,QSA]
+RewriteRule ^test$ test.php [L]
+
+</IfModule>
