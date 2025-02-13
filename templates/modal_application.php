@@ -1,11 +1,11 @@
-<?php if($_city): ?>
+<?php if($_application): ?>
 
 <?php
 
-$query = 'SELECT cities.*
-    FROM cities
-    INNER JOIN city_user ON cities.id = city_user.city_id
-    WHERE city_user.user_id = '.$_user['id'].'
+$query = 'SELECT applications.*
+    FROM applications
+    INNER JOIN application_user ON applications.id = application_user.application_id
+    WHERE application_user.user_id = '.$_user['id'].'
     AND deleted_at IS NULL
     ORDER BY name';
 $result = mysqli_query($connect, $query);
@@ -14,7 +14,7 @@ $result = mysqli_query($connect, $query);
 
 <!-- CITY MODAL -->
 <div
-  id="city"
+  id="application"
   class="w3-modal"
   style="z-index: 200; opacity: 0; border: display: none"
 >
@@ -23,8 +23,8 @@ $result = mysqli_query($connect, $query);
       <div class="w3-row">
         <div class="w3-col s6">
           <p style="margin-block-end: 8px; margin-block-start: 8px">
-            <i class="fa-solid fa-city fa-padding-right"></i> 
-            Select a City
+            <i class="fa-solid fa-application fa-padding-right"></i> 
+            Select a Application
           </p>
         </div>
         <div class="w3-col s6 w3-right-align"></div>
@@ -41,12 +41,12 @@ $result = mysqli_query($connect, $query);
         <?php while($record = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td>
-                    <?php if($_city['id'] == $record['id']): ?>
+                    <?php if($_application['id'] == $record['id']): ?>
                         <i class="fa-solid fa-check"></i>
                     <?php endif; ?>
                 </td>
                 <td>
-                    <a href="/action/city/select/id/<?=$record['id']?>"><?=$record['name']?></a>
+                    <a href="/action/application/select/id/<?=$record['id']?>"><?=$record['name']?></a>
                 </td>
                 <td></td>
             </tr>
@@ -55,13 +55,13 @@ $result = mysqli_query($connect, $query);
       </table>
     </div>
     <footer class="w3-container w3-border-top w3-right-align w3-padding">
-      <a class="w3-button w3-white w3-border" href="<?=ENV_ACCOUNT_DOMAIN?>/city/create">
+      <a class="w3-button w3-white w3-border" href="<?=ENV_ACCOUNT_DOMAIN?>/application/create">
         <i class="fa-solid fa-plus fa-padding-right"></i>
-        Create City
+        Create Application
       </a>
       <button
         class="w3-button w3-white w3-border"
-        onclick="close_modal('city');"
+        onclick="close_modal('application');"
       >
         Close
       </button>

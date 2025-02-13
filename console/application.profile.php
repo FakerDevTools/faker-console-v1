@@ -1,7 +1,7 @@
 <?php
 
 security_check();
-city_check();
+application_check();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -12,26 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_number($_POST['width']) || 
         !validate_number($_POST['height']))
     {
-        message_set('City Profile Error', 'There was an error with your city profile information.', 'red');
-        header_redirect('/city/profile');
+        message_set('Application Profile Error', 'There was an error with your application profile information.', 'red');
+        header_redirect('/application/profile');
     }
 
-    $query = 'UPDATE cities SET
+    $query = 'UPDATE applications SET
         name = "'.addslashes($_POST['name']).'",
         width = "'.addslashes($_POST['width']).'",
         height = "'.addslashes($_POST['height']).'"
-        WHERE id = '.$_city['id'].'
+        WHERE id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('City Profile Success', 'Your city profile has been updated.');
-    header_redirect('/city/dashboard');
+    message_set('Application Profile Success', 'Your application profile has been updated.');
+    header_redirect('/application/dashboard');
     
 }
 
-define('APP_NAME', $_city['name']);
+define('APP_NAME', $_application['name']);
 
-define('PAGE_TITLE', 'City Profile');
+define('PAGE_TITLE', 'Application Profile');
 define('PAGE_SELECTED_SECTION', '');
 define('PAGE_SELECTED_SUB_PAGE', '');
 
@@ -42,7 +42,7 @@ include('../templates/main_header.php');
 
 include('../templates/message.php');
 
-$city = city_fetch($_city['id']);
+$application = application_fetch($_application['id']);
 
 ?>
 
@@ -54,15 +54,15 @@ $city = city_fetch($_city['id']);
         height="50"
         style="vertical-align: top"
     />
-    <?=$_city['name']?>
+    <?=$_application['name']?>
 </h1>
 <p>
-    <a href="/city/dashboard">Dashboard</a> / 
-    City Profile
+    <a href="/application/dashboard">Dashboard</a> / 
+    Application Profile
 </p>
 <hr />
 
-<h2>City Profile</h2>
+<h2>Application Profile</h2>
 
 <form
     method="post"
@@ -76,7 +76,7 @@ $city = city_fetch($_city['id']);
         type="text" 
         id="name" 
         autocomplete="off"
-        value="<?=$city['name']?>"
+        value="<?=$application['name']?>"
     />
     <label for="name" class="w3-text-gray">
         Name <span id="name-error" class="w3-text-red"></span>
@@ -88,7 +88,7 @@ $city = city_fetch($_city['id']);
         type="number" 
         id="width" 
         autocomplete="off"
-        value="<?=$city['width']?>"
+        value="<?=$application['width']?>"
     />
     <label for="width" class="w3-text-gray">
         <i class="fa-solid fa-ruler"></i>
@@ -101,7 +101,7 @@ $city = city_fetch($_city['id']);
         type="number" 
         id="height" 
         autocomplete="off" 
-        value="<?=$city['height']?>"
+        value="<?=$application['height']?>"
     />  
     <label for="height" class="w3-text-gray">
         <i class="fa-solid fa-ruler"></i>
@@ -150,7 +150,7 @@ $city = city_fetch($_city['id']);
     
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

@@ -65,28 +65,28 @@
             <button class="w3-button" onclick="w3_sidebar_toggle(event)">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <a href="<?=ENV_CONSOLE_DOMAIN?>/city/dashboard" onclick="prevent(event)"
+            <a href="<?=ENV_CONSOLE_DOMAIN?>/application/dashboard" onclick="prevent(event)"
             ><img
                 src="https://cdn.brickmmo.com/images@1.0.0/brickmmo-logo-coloured-horizontal.png"
                 style="height: 35px"
             /></a>
 
-            <?php if($_city): ?>
+            <?php if($_application): ?>
                 <button
                     class="w3-border w3-border-gray w3-button w3-margin-left"
-                    onclick="open_modal('city')"
+                    onclick="open_modal('application')"
                 >
-                    <i class="fa-solid fa-city fa-padding-right"></i>
-                    <?=$_city['name']?>
+                    <i class="fa-solid fa-application fa-padding-right"></i>
+                    <?=$_application['name']?>
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
             <?php else: ?>
                 <button
-                    onclick="location.href='<?=ENV_ACCOUNT_DOMAIN?>/city/create';"
+                    onclick="location.href='<?=ENV_ACCOUNT_DOMAIN?>/application/create';"
                     class="w3-border w3-border-gray w3-button w3-margin-left"
                 >
                    <i class="fa-solid fa-plus fa-padding-right"></i>
-                    Create City
+                    Create Application
                 </button>
             <?php endif; ?>
 

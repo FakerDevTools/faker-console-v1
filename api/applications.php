@@ -1,11 +1,11 @@
 <?php
 
 $query = 'SELECT * 
-    FROM cities
+    FROM applications
     ORDER BY name';
 $result = mysqli_query($connect, $query);
 
-$cities = array();
+$applications = array();
 
 while($record = mysqli_fetch_assoc($result))
 {
@@ -16,7 +16,7 @@ while($record = mysqli_fetch_assoc($result))
     $next['height'] = $record['height'];
     $next['date_at'] = $record['date_at'];
     $next['date_multiplier'] = $record['date_multiplier'];
-    $next['avatar'] = city_avatar($record['id'], true);
+    $next['avatar'] = application_avatar($record['id'], true);
 
     $query = 'SELECT * 
         FROM users
@@ -30,11 +30,11 @@ while($record = mysqli_fetch_assoc($result))
     $next['user']['url'] = ENV_ACCOUNT_DOMAIN.'/profile/'.$record2['url'];
     $next['user']['avatar'] = user_avatar($record2['id'], true);
     
-    $cities[] = $next;
+    $applications[] = $next;
 }
 
 $data = array(
     'message' => 'Cities retrieved successfully.',
     'error' => false, 
-    'cities' => $cities,
+    'applications' => $applications,
 );

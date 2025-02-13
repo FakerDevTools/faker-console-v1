@@ -1,38 +1,38 @@
 <?php
 
 security_check();
-city_check();
+application_check();
 
 if (isset($_GET['uninvite'])) 
 {
 
     if(!$user = user_fetch($_GET['uninvite']))
     {
-        message_set('Delete Error', 'There was an error removing this member from the city.', 'red');
-        header_redirect('/city/members');
+        message_set('Delete Error', 'There was an error removing this member from the application.', 'red');
+        header_redirect('/application/members');
     }
 
-    $query = 'DELETE FROM city_user 
+    $query = 'DELETE FROM application_user 
         WHERE user_id = '.$user['id'].'
-        AND city_id = '.$_city['id'].'
+        AND application_id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
     $query = 'UPDATE users SET
-        city_id = NULL
+        application_id = NULL
         WHERE id = '.$user['id'].'
-        AND city_id = '.$_city['id'].'
+        AND application_id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    user_set_city();
+    user_set_application();
 
-    message_set('Delete Success', 'Member has been removed from this city.');
-    header_redirect('/city/dashboard');
+    message_set('Delete Success', 'Member has been removed from this application.');
+    header_redirect('/application/dashboard');
     
 }
 
-define('APP_NAME', $_city['name']);
+define('APP_NAME', $_application['name']);
 
 define('PAGE_TITLE', 'Members');
 define('PAGE_SELECTED_SECTION', '');
@@ -45,10 +45,10 @@ include('../templates/main_header.php');
 
 include('../templates/message.php');
 
-$query = 'SELECT users.*,city_user.*
+$query = 'SELECT users.*,application_user.*
     FROM users
-    INNER JOIN city_user ON users.id = city_user.user_id
-    WHERE city_user.city_id = '.$_city['id'].'
+    INNER JOIN application_user ON users.id = application_user.user_id
+    WHERE application_user.application_id = '.$_application['id'].'
     ORDER BY last,first';
 $result = mysqli_query($connect, $query);
 
@@ -62,10 +62,10 @@ $result = mysqli_query($connect, $query);
         height="50"
         style="vertical-align: top"
     />
-    <?=$_city['name']?>
+    <?=$_application['name']?>
 </h1>
 <p>
-    <a href="/city/dashboard">Dashboard</a> / 
+    <a href="/application/dashboard">Dashboard</a> / 
     Members
 </p>
 <hr />
@@ -91,7 +91,7 @@ $result = mysqli_query($connect, $query);
                 />
             </td>
             <td>
-                <?php if($record['city_id'] == $_city['id']): ?>
+                <?php if($record['application_id'] == $_application['id']): ?>
                     <i class="fa-solid fa-lock"></i>
                 <?php endif; ?>
             </td>
@@ -107,8 +107,8 @@ $result = mysqli_query($connect, $query);
                 <?php endif; ?>
             </td>
             <td>
-                <?php if($record['user_id'] != $_user['id'] && $record['user_id'] != $_city['user_id']): ?>
-                    <a href="#" onclick="return confirmModal('Are you sure you want to remove <?=user_name($_user['id'])?> from <?=$_city['name']?>?', '/city/members/uninvite/<?=$record['user_id']?>');">
+                <?php if($record['user_id'] != $_user['id'] && $record['user_id'] != $_application['user_id']): ?>
+                    <a href="#" onclick="return confirmModal('Are you sure you want to remove <?=user_name($_user['id'])?> from <?=$_application['name']?>?', '/application/members/uninvite/<?=$record['user_id']?>');">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
                 <?php endif; ?>
@@ -119,7 +119,7 @@ $result = mysqli_query($connect, $query);
 </table>
 
 <a
-    href="/city/invite/"
+    href="/application/invite/"
     class="w3-button w3-white w3-border"
 >
     <i class="fa-solid fa-envelope fa-padding-right"></i> Invite New Member
@@ -127,7 +127,7 @@ $result = mysqli_query($connect, $query);
     
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

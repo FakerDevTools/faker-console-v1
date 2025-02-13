@@ -5,7 +5,7 @@ function navigation_array($selected = false)
 
     $navigation = [
         [
-            'title' => 'City Portal',
+            'title' => 'Application Portal',
             'sections' => [
                 [
                     'title' => 'Geography',

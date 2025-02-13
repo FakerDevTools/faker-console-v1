@@ -59,8 +59,8 @@ function security_is_logged_in()
 function security_extend_cookie()
 {
 
-    setcookie('hash_id', $_COOKIE['hash_id'], time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
-    setcookie('hash_string', $_COOKIE['hash_string'], time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+    setcookie('hash_id', $_COOKIE['hash_id'], time() + (60 * 60 * 24 * 30), '/', 'faker.ca');
+    setcookie('hash_string', $_COOKIE['hash_string'], time() + (60 * 60 * 24 * 30), '/', 'faker.ca');
 
 }
 
@@ -70,8 +70,8 @@ function security_set_user_cookie($id)
     $user = user_fetch($id);
 
     $hash = password_hash($user['password'], PASSWORD_DEFAULT);
-    setcookie('hash_id', security_encrypt($user['id']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
-    setcookie('hash_string', security_encrypt($user['password']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+    setcookie('hash_id', security_encrypt($user['id']), time() + (60 * 60 * 24 * 30), '/', 'faker.ca');
+    setcookie('hash_string', security_encrypt($user['password']), time() + (60 * 60 * 24 * 30), '/', 'faker.ca');
 
 }
 
@@ -83,20 +83,17 @@ function security_set_user_session($id)
     $_SESSION['user']['id'] = $user['id'];
     $_SESSION['user']['first'] = $user['first'];
     $_SESSION['user']['last'] = $user['last'];
-    $_SESSION['user']['url'] = $user['url'];
     $_SESSION['user']['admin'] = $user['admin'];
     $_SESSION['user']['session_id'] = password_hash($user['session_id'], PASSWORD_BCRYPT);
     $_SESSION['user']['github_username'] = $user['github_username'];
     $_SESSION['user']['avatar'] = $user['avatar'];
-    $_SESSION['user']['city_id'] = $user['city_id'];
+    $_SESSION['user']['application_id'] = $user['application_id'];
 
-    if($city = city_fetch($user['city_id']))
+    if($application = application_fetch($user['application_id']))
     {
-        $_SESSION['city']['id'] = $city['id'];
-        $_SESSION['city']['name'] = $city['name'];
-        $_SESSION['city']['width'] = $city['width'];
-        $_SESSION['city']['height'] = $city['height'];
-        $_SESSION['city']['image'] = $city['image'];
+        $_SESSION['application']['id'] = $application['id'];
+        $_SESSION['application']['name'] = $application['name'];
+        $_SESSION['application']['image'] = $application['image'];
     }
 
 }

@@ -58,7 +58,7 @@ $navigation = navigation_array();
     onclick="prevent(event);"
 >
   <div class="w3-padding-16 w3-border-bottom">
-    <a href="<?=ENV_CONSOLE_DOMAIN?>/city/dashboard" class="w3-bar-item w3-button">
+    <a href="<?=ENV_CONSOLE_DOMAIN?>/application/dashboard" class="w3-bar-item w3-button">
       <i class="fa-solid fa-gauge fa-padding-right w3-text-dark-grey"></i>
       Dashboard
     </a>
@@ -70,15 +70,15 @@ $navigation = navigation_array();
 
       <?php if($level['title'] == 'Administration' && $_user['admin'] != 1): ?>
 
-      <?php elseif($level['title'] == 'City Portal' && !$_city): ?>
+      <?php elseif($level['title'] == 'Application Portal' && !$_application): ?>
 
         <div class="w3-bar-item w3-text-gray bm-caps"><?=$level['title']?></div>
         <button
-            onclick="location.href='<?=ENV_ACCOUNT_DOMAIN?>/city/create';"
+            onclick="location.href='<?=ENV_ACCOUNT_DOMAIN?>/application/create';"
             class="w3-border w3-border-gray w3-button w3-margin-left"
         >
             <i class="fa-solid fa-plus fa-padding-right"></i>
-            Create City
+            Create Application
         </button>
 
       <?php else: ?>

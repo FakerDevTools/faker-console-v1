@@ -1,7 +1,7 @@
 <?php
 
 security_check();
-city_check();
+application_check();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_email($_POST['email']))
     {
         message_set('Invite Error', 'There was an error with the provided invitation email address.', 'red');
-        header_redirect('/city/invite');
+        header_redirect('/application/invite');
     }
 
     $data['invite_hash'] = string_hash();
@@ -20,14 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $query = 'INSERT INTO invites (
             email, 
             invite_hash,
-            city_id,
+            application_id,
             user_id,
             created_at,
             updated_at
         ) VALUES (
             "'.addslashes($_POST['email']).'",
             "'.addslashes($data['invite_hash']).'",
-            '.$_city['id'].',
+            '.$_application['id'].',
             '.$_user['id'].',
             NOW(),
             NOW()
@@ -41,12 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     email_send($_POST['email'], $_POST['name'], $message, 'Invitation to BrickMMO');
 
-    message_set('Invite Success', 'Your city invitation has been sent to your new member.');
-    header_redirect('/city/dashboard');
+    message_set('Invite Success', 'Your application invitation has been sent to your new member.');
+    header_redirect('/application/dashboard');
     
 }
 
-define('APP_NAME', $_city['name']);
+define('APP_NAME', $_application['name']);
 
 define('PAGE_TITLE', 'Invite Member');
 define('PAGE_SELECTED_SECTION', '');
@@ -69,11 +69,11 @@ include('../templates/message.php');
         height="50"
         style="vertical-align: top"
     />
-    <?=$_city['name']?>
+    <?=$_application['name']?>
 </h1>
 <p>
-    <a href="/city/dashboard">Dashboard</a> / 
-    <a href="/city/members">Members</a> / 
+    <a href="/application/dashboard">Dashboard</a> / 
+    <a href="/application/members">Members</a> / 
     Invite Member
 </p>
 <hr />
@@ -147,7 +147,7 @@ include('../templates/message.php');
     
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

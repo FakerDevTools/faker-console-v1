@@ -4,12 +4,12 @@
   <?php if(security_is_logged_in()): ?>
     
   let user = <?=json_encode($_SESSION['user'])?>;
-  let city = <?=json_encode($_SESSION['user'])?>;
+  let application = <?=json_encode($_SESSION['user'])?>;
 
   <?php else: ?>
 
   let user = "";
-  let city = "";
+  let application = "";
     
   <?php endif; ?>
 

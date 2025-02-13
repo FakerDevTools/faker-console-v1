@@ -89,7 +89,7 @@ include('../templates/message.php');
     
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

@@ -11,11 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_blank($_POST['width']) || 
         !validate_blank($_POST['height']))
     {
-        message_set('New City Error', 'There was an error with your city information.', 'red');
-        header_redirect('/city/create');
+        message_set('New Application Error', 'There was an error with your application information.', 'red');
+        header_redirect('/application/create');
     }
 
-    $query = 'INSERT INTO cities (
+    $query = 'INSERT INTO applications (
         name,
         width,
         height,
@@ -36,33 +36,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         )';
     $result = mysqli_query($connect, $query);
 
-    $city_id = mysqli_insert_id($connect);
+    $application_id = mysqli_insert_id($connect);
 
-    $query = 'INSERT INTO city_user (
-            city_id, 
+    $query = 'INSERT INTO application_user (
+            application_id, 
             user_id
         ) VALUES (
-            '.$city_id.',
+            '.$application_id.',
             '.$_user['id'].'
         )';
     mysqli_query($connect, $query);
 
     $query = 'UPDATE users SET
-        city_id = '.$city_id.'
+        application_id = '.$application_id.'
         WHERE id = '.$_user['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
     security_set_user_session($_user['id']);
 
-    message_set('New City Success', 'Congratulations! A new city has been created.');
-    header_redirect('/city/dashboard');
+    message_set('New Application Success', 'Congratulations! A new application has been created.');
+    header_redirect('/application/dashboard');
     
 }
 
 define('APP_NAME', 'My Account');
 
-define('PAGE_TITLE', 'Create City');
+define('PAGE_TITLE', 'Create Application');
 define('PAGE_SELECTED_SECTION', '');
 define('PAGE_SELECTED_SUB_PAGE', '');
 
@@ -87,11 +87,11 @@ include('../templates/message.php');
 </h1>
 <p>
     <a href="/account/dashboard">Dashboard</a> / 
-    Create City
+    Create Application
 </p>
 <hr />
 
-<h2>Create City</h2>
+<h2>Create Application</h2>
 
 <form
     method="post"
@@ -136,7 +136,7 @@ include('../templates/message.php');
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
         <i class="fa-solid fa-plus fa-padding-right"></i>
-        Create City
+        Create Application
     </button>
 </form>
 
@@ -176,7 +176,7 @@ include('../templates/message.php');
     
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

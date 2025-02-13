@@ -8,9 +8,9 @@ if(isset($_SESSION['invite']))
     $invite = invite_fetch($_SESSION['invite']);
 
     $query = 'SELECT *
-        FROM city_user
+        FROM application_user
         WHERE user_id = '.$_user['id'].'
-        AND city_id = '.$invite['city_id'].'
+        AND application_id = '.$invite['application_id'].'
         LIMIT 1';
     $result = mysqli_query($connect, $query);
 
@@ -18,23 +18,23 @@ if(isset($_SESSION['invite']))
     {
         unset($_SESSION['invite']);
 
-        message_set('Invitation Error', 'You are already a member of this city.', 'red', true);
+        message_set('Invitation Error', 'You are already a member of this application.', 'red', true);
         header_redirect('/account/dashboard');
     }
 
-    $query = 'INSERT INTO city_user (
-            city_id,
+    $query = 'INSERT INTO application_user (
+            application_id,
             user_id
         ) VALUES (
-            '.$invite['city_id'].',
+            '.$invite['application_id'].',
             '.$_user['id'].'
         )';
     mysqli_query($connect, $query); 
 
     unset($_SESSION['invite']);
 
-    message_set('Invitation Success', 'Invitation to the new city has been accepted!', 'green', true);
-    header_redirect(ENV_CONSOLE_DOMAIN.'/action/city/select/id/'.$invite['city_id']);
+    message_set('Invitation Success', 'Invitation to the new application has been accepted!', 'green', true);
+    header_redirect(ENV_CONSOLE_DOMAIN.'/action/application/select/id/'.$invite['application_id']);
 
 }
 
@@ -146,7 +146,7 @@ include('../templates/main_header.php');
 
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

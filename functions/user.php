@@ -42,16 +42,16 @@ function user_fetch($identifier, $field = false)
 
 }
 
-function user_set_city($user_id, $city_id = false)
+function user_set_application($user_id, $application_id = false)
 {
 
     global $connect; 
     
-    if($city_id)
+    if($application_id)
     {
 
         $query = 'UPDATE users SET
-            city_id = '.$city_id.'
+            application_id = '.$application_id.'
             WHERE id = '.$user_id.'
             LIMIT 1';
         mysqli_query($connect, $query);
@@ -60,11 +60,11 @@ function user_set_city($user_id, $city_id = false)
     else
     {
 
-        $query = 'SELECT cities.id
-            FROM cities
-            INNER JOIN city_user 
-            ON city_user.city_id = cities.id
-            WHERE city_user.user_id = '.$user_id.'
+        $query = 'SELECT applications.id
+            FROM applications
+            INNER JOIN application_user 
+            ON application_user.application_id = applications.id
+            WHERE application_user.user_id = '.$user_id.'
             AND deleted_at IS NULL
             ORDER BY created_at DESC
             LIMIT 1';
@@ -73,7 +73,7 @@ function user_set_city($user_id, $city_id = false)
         if(mysqli_num_rows($result))
         {
             $record = mysqli_fetch_assoc($result);
-            user_set_city($user_id, $record['id']);
+            user_set_application($user_id, $record['id']);
         }
 
     }

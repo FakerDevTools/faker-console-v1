@@ -1,18 +1,18 @@
 <?php
 
-function city_avatar($id, $absolute = false)
+function application_avatar($id, $absolute = false)
 {
-    $city = city_fetch($id);
-    return $city['image'] ? $city['image'] : ($absolute ? ENV_CONSOLE_DOMAIN : '').'/images/no_city.png';
+    $application = application_fetch($id);
+    return $application['image'] ? $application['image'] : ($absolute ? ENV_CONSOLE_DOMAIN : '').'/images/no_application.png';
 }
 
-function city_fetch_all()
+function application_fetch_all()
 {
 
     global $connect;
 
     $query = 'SELECT *
-        FROM cities
+        FROM applications
         ORDER BY name';
     $result = mysqli_query($connect, $query);
 
@@ -27,7 +27,7 @@ function city_fetch_all()
 
 }
 
-function city_fetch($identifier, $field = false)
+function application_fetch($identifier, $field = false)
 {
 
     if(!$identifier) return false;
@@ -37,14 +37,14 @@ function city_fetch($identifier, $field = false)
     if($field)
     {
         $query = 'SELECT *
-            FROM cities
+            FROM applications
             WHERE '.$field.' = "'.addslashes($identifier).'"
             LIMIT 1';
     }
     else
     {
         $query = 'SELECT *
-            FROM cities
+            FROM applications
             WHERE id = "'.addslashes($identifier).'"
             AND deleted_at IS NULL
             LIMIT 1';
@@ -57,20 +57,20 @@ function city_fetch($identifier, $field = false)
 
 }
 
-function city_check()
+function application_check()
 {
 
-    global $_city, $_user;
+    global $_application, $_user;
 
-    if(!$_city)
+    if(!$_application)
     {
-        user_set_city($_user['id']);
+        user_set_application($_user['id']);
         header_redirect(ENV_ACCOUNT_DOMAIN.'/account/dashboard');
     }
 
 }
 
-function city_seeder($identifier)
+function application_seeder($identifier)
 {
 
     global $connect;
@@ -88,7 +88,7 @@ use App\Models\SqureImage;
 
     $query = 'SELECT *
         FROM roads
-        WHERE city_id = "'.$identifier.'"
+        WHERE application_id = "'.$identifier.'"
         ORDER BY id';
     $result = mysqli_query($connect, $query);
 
@@ -108,7 +108,7 @@ use App\Models\SqureImage;
 
     $query = 'SELECT *
         FROM tracks
-        WHERE city_id = "'.$identifier.'"
+        WHERE application_id = "'.$identifier.'"
         ORDER BY id';
     $result = mysqli_query($connect, $query);
 
@@ -131,7 +131,7 @@ use App\Models\SqureImage;
 
     $query = 'SELECT *
         FROM buildings
-        WHERE city_id = "'.$identifier.'"
+        WHERE application_id = "'.$identifier.'"
         ORDER BY id';
     $result = mysqli_query($connect, $query);
 
@@ -154,7 +154,7 @@ use App\Models\SqureImage;
 
     $query = 'SELECT *
         FROM squares
-        WHERE city_id = "'.$identifier.'"
+        WHERE application_id = "'.$identifier.'"
         ORDER BY id';
     $result = mysqli_query($connect, $query);
 
@@ -182,7 +182,7 @@ use App\Models\SqureImage;
 
     $query = 'SELECT *
         FROM buildings
-        WHERE city_id = "'.$identifier.'"
+        WHERE application_id = "'.$identifier.'"
         ORDER BY id';
     $result = mysqli_query($connect, $query);
 

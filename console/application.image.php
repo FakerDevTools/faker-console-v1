@@ -3,7 +3,7 @@
 use \WideImage\WideImage;
 
 security_check();
-city_check();
+application_check();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_image($_FILES['image']))
     {
         message_set('Image Error', 'There was an error with your uploaded image. Image may be wrong type or size.', 'red');
-        header_redirect('/city/image');
+        header_redirect('/application/image');
     }
 
     $image = Wideimage::load($_FILES['image']['tmp_name']);
@@ -21,18 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $image = $image->crop('center', 'center', 400, 400);
     $image = 'data:image/jpeg;base64, '.base64_encode($image->asString('jpg'));
 
-    $query = 'UPDATE cities SET
+    $query = 'UPDATE applications SET
         image = "'.addslashes($image).'"
-        WHERE id = '.$_city['id'].'
+        WHERE id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
     
     message_set('Image Success', 'Your profile image has been updated.');
-    header_redirect('/city/dashboard');
+    header_redirect('/application/dashboard');
     
 }
 
-define('APP_NAME', $_city['name']);
+define('APP_NAME', $_application['name']);
 
 define('PAGE_TITLE', 'Image');
 define('PAGE_SELECTED_SECTION', '');
@@ -55,10 +55,10 @@ include('../templates/message.php');
         height="50"
         style="vertical-align: top"
     />
-    <?=$_city['name']?>
+    <?=$_application['name']?>
 </h1>
 <p>
-    <a href="/city/dashboard">Dashboard</a> / 
+    <a href="/application/dashboard">Dashboard</a> / 
     Image
 </p>
 <hr />
@@ -90,7 +90,7 @@ include('../templates/message.php');
     
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

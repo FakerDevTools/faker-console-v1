@@ -1,6 +1,6 @@
 <?php
 
-use \Firebase\JWT\JWT;
+// use \Firebase\JWT\JWT;
 
 if(security_is_logged_in())
 {
@@ -42,8 +42,8 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         header_redirect('/login');
     }
 
-    // Ensure they have a city set in their profile
-    if(!$user['city_id']) user_set_city($user['id']);
+    // Ensure they have a application set in their profile
+    if(!$user['application_id']) user_set_application($user['id']);
 
     // Start session and store user data
     security_set_user_session($user['id']);

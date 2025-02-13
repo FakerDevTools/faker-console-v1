@@ -10,7 +10,7 @@ function validate_reserved_urls($url)
 
     $reserved_urls = array(
         'url',
-        'brickmmo',
+        'faker',
         'admin',
     );
 

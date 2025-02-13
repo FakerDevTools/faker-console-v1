@@ -22,7 +22,7 @@ include('../templates/login_header.php');
     <?php if($_user): ?>
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/action/logout">Logout</a> | 
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/dashboard">Account Dashboard</a> | 
-        <a href="<?=ENV_CONSOLE_DOMAIN?>/city/dashboard">City Dashboard</a>
+        <a href="<?=ENV_CONSOLE_DOMAIN?>/application/dashboard">Application Dashboard</a>
     <?php else: ?>
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/login">Login</a> | 
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/register">Register</a>
@@ -33,7 +33,7 @@ include('../templates/login_header.php');
 
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');

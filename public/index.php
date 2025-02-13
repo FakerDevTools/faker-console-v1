@@ -6,7 +6,7 @@
  * determine which PHP file to execute and which parts of the URL are variables. 
  * 
  * For example:
- * http://local.console.brickmmo.com:7777/media/tags/edit/1
+ * http://local.console.faker.ca:7777/media/tags/edit/1
  * Will route to the /console/media.tags.php file with a variable named edit
  * with a value of 1.
  */
@@ -26,13 +26,13 @@ include('../includes/config.php');
 include('../functions/functions.php');
 
 /**
- * Fetch city and user if applicable.
+ * Fetch application and user if applicable.
  */ 
 if(isset($_SESSION['user'])) $_user = user_fetch($_SESSION['user']['id']);
 else $_user = false;
 
-if(isset($_SESSION['city'])) $_city = city_fetch($_SESSION['city']['id']);
-else $_city = false;
+if(isset($_SESSION['application'])) $_application = application_fetch($_SESSION['application']['id']);
+else $_application = false;
 
 /**
  * Get domain.
@@ -75,7 +75,7 @@ $parts = array_filter(explode("/", trim($_SERVER['REQUEST_URI'], "/")));
 if(!count($parts))
 {
 
-    header_redirect(ENV_CONSOLE_DOMAIN.'/city/dashboard');
+    header_redirect(ENV_CONSOLE_DOMAIN.'/application/dashboard');
 
 }
 

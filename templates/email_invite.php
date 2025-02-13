@@ -1,5 +1,5 @@
 <p>
-    You have been invited to collaborate on a BrickMMO city!
+    You have been invited to collaborate on a BrickMMO application!
 </p>
 
 <p>
