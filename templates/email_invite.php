@@ -1,5 +1,5 @@
 <p>
-    You have been invited to collaborate on a BrickMMO application!
+    You have been invited to collaborate on a Faker application!
 </p>
 
 <p>

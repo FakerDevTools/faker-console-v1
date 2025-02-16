@@ -23,7 +23,7 @@ $result = mysqli_query($connect, $query);
       <div class="w3-row">
         <div class="w3-col s6">
           <p style="margin-block-end: 8px; margin-block-start: 8px">
-            <i class="fa-solid fa-application fa-padding-right"></i> 
+            <i class="fa-solid fa-server fa-padding-right"></i> 
             Select a Application
           </p>
         </div>

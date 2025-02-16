@@ -76,7 +76,7 @@
                     class="w3-border w3-border-gray w3-button w3-margin-left"
                     onclick="open_modal('application')"
                 >
-                    <i class="fa-solid fa-application fa-padding-right"></i>
+                    <i class="fa-solid fa-server fa-padding-right"></i>
                     <?=$_application['name']?>
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
@@ -102,9 +102,11 @@
                 onclick="open_modal('avatar-options');"
             />
       
+            <!--
             <button class="w3-button" onclick="window.location='https://applications.brickmmo.com';">
                 <i class="fa-solid fa-grip-vertical"></i>
             </button>
+            -->
 
         </div>
 

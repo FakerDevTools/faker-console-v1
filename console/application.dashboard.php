@@ -33,7 +33,7 @@ include('../templates/message.php');
         <?=$_application['name']?>
     </h1>
 
-    <p>Manage your BrickMMO application profile, image, and members.</p>
+    <p>Manage your Faker application profile, image, and members.</p>
 
 </div>
 
@@ -41,14 +41,8 @@ include('../templates/message.php');
 
     <div class="w3-margin-top w3-margin-bottom">
         <a href="<?=ENV_CONSOLE_DOMAIN?>/application/profile" class="w3-display-container">
-            <i class="fa-solid fa-application fa-padding-right w3-text-dark-grey"></i>
+            <i class="fa-solid fa-server fa-padding-right w3-text-dark-grey"></i>
             Application Profile
-            <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey"></i>
-        </a>
-        <hr>
-        <a href="<?=ENV_CONSOLE_DOMAIN?>/application/url" class="w3-display-container">
-            <i class="fa-solid fa-globe fa-padding-right w3-text-dark-grey"></i>
-            URL
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey"></i>
         </a>
         <hr>

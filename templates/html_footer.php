@@ -34,7 +34,7 @@
   }
 </script>
 
-<script src="https://kit.fontawesome.com/a74f41de6e.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/ce455df547.js" crossorigin="anonymous"></script>
 
   </body>
 </html>

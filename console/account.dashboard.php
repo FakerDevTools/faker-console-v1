@@ -91,7 +91,7 @@ include('../templates/main_header.php');
         <?=user_name($_user['id'])?>
     </h1>
 
-    <p>Manage your BrickMMO profile, avatar, and GitHub connection.</p>
+    <p>Manage your Faker profile, avatar, and GitHub connection.</p>
 
 </div>
 
@@ -101,7 +101,7 @@ include('../templates/main_header.php');
                 <i class="fa-solid fa-envelope"></i>
                 Email Unverified
             </h3>
-            <p>Verify your email address to unlock all BrickMMO console features.</p>
+            <p>Verify your email address to unlock all Faker console features.</p>
             <a href="/account/dashboard/verify" class="w3-button w3-white w3-border">
                 <i class="fa-solid fa-arrow-rotate-right fa-padding-right"></i> Resend Verification Email
             </a>
@@ -115,12 +115,6 @@ include('../templates/main_header.php');
             <i class="fa-solid fa-user fa-padding-right w3-text-dark-grey"></i>
             My Profile
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey"></i>
-        </a>
-        <hr>
-        <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/url" class="w3-block">
-            <i class="fa-solid fa-globe fa-padding-right w3-text-dark-grey"></i>
-            URL
-            <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey" class="w3-display-right"></i>
         </a>
         <hr>
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/avatar" class="w3-block">

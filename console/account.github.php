@@ -37,7 +37,7 @@ include('../templates/message.php');
 <?php if($_user['github_username']): ?>
 
     <p>
-        Your BrickMMO account is currently connected to your 
+        Your Faker account is currently connected to your 
         <a href="https://github.com/<?=$_user['github_username']?>">
             <i class="fa-brands fa-github"></i>
             <?=$_user['github_username']?>
@@ -47,15 +47,15 @@ include('../templates/message.php');
 
     <hr>
 
-    <p>Revoking GitHub acccess from your BrickMMO account will:</p>
+    <p>Revoking GitHub acccess from your Faker account will:</p>
     <ul class="w3-ul w3-margin-bottom">
-        <li>Remove all GitHub access from your BrickMMO account.</li>
+        <li>Remove all GitHub access from your Faker account.</li>
         <li>
-            Disable your BrickMMO 
+            Disable your Faker 
             <a href="<?=ENV_ACCOUNT_DOMAIN?>/profile/<?=$_user['github_username']?>/">public profile</a>.
         </li>
-        <li>Prevent retrieving of BrickMMO contribution stats.</li>
-        <li>Not remove your GitHub avatar from your BrickMMO account.</li>
+        <li>Prevent retrieving of Faker contribution stats.</li>
+        <li>Not remove your GitHub avatar from your Faker account.</li>
     </ul>
     <a href="<?=ENV_ACCOUNT_DOMAIN?>/action/github/user/revoke" class="w3-button w3-white w3-border">
         <i class="fa-solid fa-xmark fa-padding-right"></i>
@@ -65,18 +65,18 @@ include('../templates/message.php');
 <?php else: ?>
 
     <p>
-        Your BrickMMO account is currently <strong>NOT</strong> connected to your GitHub account.
+        Your Faker account is currently <strong>NOT</strong> connected to your GitHub account.
     </p>
 
     <hr>
 
-    <p>Providing GitHub acccess from your BrickMMO account will:</p>
+    <p>Providing GitHub acccess from your Faker account will:</p>
     <ul class="w3-ul w3-margin-bottom">
         <li>
-            Enable your BrickMMO public profile.
+            Enable your Faker public profile.
         </li>
-        <li>Permit retrieving of BrickMMO contribution stats.</li>
-        <li>Apply your GitHub avatar to your BrickMMO account.</li>
+        <li>Permit retrieving of Faker contribution stats.</li>
+        <li>Apply your GitHub avatar to your Faker account.</li>
     </ul>
     <a href="<?=github_url()?>" class="w3-button w3-white w3-border">
         <i class="fa-solid fa-plus fa-padding-right"></i>

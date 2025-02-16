@@ -636,7 +636,7 @@ function navigation_array($selected = false)
                                 ],[
                                     'br' => '---',
                                 ],[
-                                    'title' => 'Visit BrickMMO Media',
+                                    'title' => 'Visit Faker Media',
                                     'url' => 'https://media.brickmmo.com',
                                     'colour' => 'orange',
                                     'icon' => 'fa-solid fa-arrow-up-right-from-square',

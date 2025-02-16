@@ -1,5 +1,5 @@
 <p>
-    Thank you for registering for a BrickMMO account. Please click the 
+    Thank you for registering for a Faker account. Please click the 
     link below to verify your email address.
 </p>
 

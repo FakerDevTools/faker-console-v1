@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $message = ob_get_contents();
     ob_end_clean();
 
-    email_send($_POST['email'], $_POST['name'], $message, 'Invitation to BrickMMO');
+    email_send($_POST['email'], $_POST['name'], $message, 'Invitation to Faker');
 
     message_set('Invite Success', 'Your application invitation has been sent to your new member.');
     header_redirect('/application/dashboard');
