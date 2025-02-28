@@ -99,6 +99,14 @@ function validate_alpha_numeric($value)
 }
 
 /*
+ * Basic validation for a GitHub username
+ */
+function validate_number($value)
+{
+    return preg_match('/^[0-9]+$/', $value);
+}
+
+/*
  * Basic validation for images uploads
  */
 function validate_image($value)

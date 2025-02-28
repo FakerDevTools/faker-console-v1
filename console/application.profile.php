@@ -8,18 +8,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     
     // Basic serverside validation
     if (
-        !validate_blank($_POST['name']) || 
-        !validate_number($_POST['width']) || 
-        !validate_number($_POST['height']))
+        !validate_blank($_POST['name']))
     {
         message_set('Application Profile Error', 'There was an error with your application profile information.', 'red');
         header_redirect('/application/profile');
     }
 
     $query = 'UPDATE applications SET
-        name = "'.addslashes($_POST['name']).'",
-        width = "'.addslashes($_POST['width']).'",
-        height = "'.addslashes($_POST['height']).'"
+        name = "'.addslashes($_POST['name']).'"
         WHERE id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
@@ -80,32 +76,6 @@ $application = application_fetch($_application['id']);
     />
     <label for="name" class="w3-text-gray">
         Name <span id="name-error" class="w3-text-red"></span>
-    </label>
-
-    <input 
-        name="width" 
-        class="w3-input w3-margin-top w3-border" 
-        type="number" 
-        id="width" 
-        autocomplete="off"
-        value="<?=$application['width']?>"
-    />
-    <label for="width" class="w3-text-gray">
-        <i class="fa-solid fa-ruler"></i>
-        Width <span id="width-error" class="w3-text-red"></span>
-    </label>
-
-    <input 
-        name="height" 
-        class="w3-input w3-border w3-margin-top" 
-        type="number" 
-        id="height" 
-        autocomplete="off" 
-        value="<?=$application['height']?>"
-    />  
-    <label for="height" class="w3-text-gray">
-        <i class="fa-solid fa-ruler"></i>
-        Height <span id="height-error" class="w3-text-red"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
