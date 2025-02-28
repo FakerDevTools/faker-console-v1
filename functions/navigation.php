@@ -83,25 +83,21 @@ function navigation_array($selected = false)
         $selected = str_replace('.', '/', $selected);
         $selected = substr($selected, 0, strrpos($selected, '/'));
 
-        foreach($navigation as $levels)
+        foreach($navigation as $section)
         {
 
-            foreach($levels['sections'] as $section)
+            foreach($section['pages'] as $page)
             {
 
-                foreach($section['pages'] as $page)
+                if(strpos($page['url'], $selected) === 0)
                 {
-
-                    if(strpos($page['url'], $selected) === 0)
-                    {
-                        return $page;
-                    }
-
+                    return $section;
                 }
 
             }
 
         }
+
 
     }
 

@@ -28,7 +28,7 @@ $navigation = navigation_array(PAGE_SELECTED_SUB_PAGE);
 
     <div class="w3-padding-16 w3-border-bottom">
     
-        <?php foreach($navigation['sub-pages'] as $page): ?>
+        <?php foreach($navigation['pages'] as $page): ?>
 
             <?php if(isset($page['title'])): ?>
 
