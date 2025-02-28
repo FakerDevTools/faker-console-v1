@@ -65,7 +65,7 @@ function application_check()
     if(!$_application)
     {
         user_set_application($_user['id']);
-        header_redirect(ENV_ACCOUNT_DOMAIN.'/account/dashboard');
+        header_redirect(ENV_CONSOLE_DOMAIN.'/account/dashboard');
     }
 
 }

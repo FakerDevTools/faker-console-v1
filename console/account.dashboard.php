@@ -78,7 +78,7 @@ include('../templates/main_header.php');
 
 <div class="w3-center">
 
-    <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/avatar">
+    <a href="<?=ENV_CONSOLE_DOMAIN?>/account/avatar">
         <img
             src="<?=user_avatar($_user['id']);?>"
             style="height: 100px"
@@ -111,25 +111,25 @@ include('../templates/main_header.php');
 <div class="w3-border w3-padding w3-margin-top w3-margin-bottom">
 
     <div class="w3-margin-top w3-margin-bottom">
-        <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/profile" class="w3-display-container">
+        <a href="<?=ENV_CONSOLE_DOMAIN?>/account/profile" class="w3-display-container">
             <i class="fa-solid fa-user fa-padding-right w3-text-dark-grey"></i>
             My Profile
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey"></i>
         </a>
         <hr>
-        <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/avatar" class="w3-block">
+        <a href="<?=ENV_CONSOLE_DOMAIN?>/account/avatar" class="w3-block">
             <i class="fa-solid fa-image-portrait fa-padding-right w3-text-dark-grey"></i>
             Avatar
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey" class="w3-display-right"></i>
         </a>
         <hr>
-        <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/password" class="w3-block">
+        <a href="<?=ENV_CONSOLE_DOMAIN?>/account/password" class="w3-block">
             <i class="fa-solid fa-lock fa-padding-right w3-text-dark-grey"></i>
             Change Password
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey" class="w3-display-right"></i>
         </a>
         <hr>
-        <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/github" class="w3-block">
+        <a href="<?=ENV_CONSOLE_DOMAIN?>/account/github" class="w3-block">
             <i class="fa-brands fa-github fa-padding-right w3-text-dark-grey"></i>
             GitHub Account
             <?php if($_user['github_username']): ?>(<?=$_user['github_username']?>)<?php endif; ?>

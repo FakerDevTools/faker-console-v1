@@ -82,7 +82,7 @@
                 </button>
             <?php else: ?>
                 <button
-                    onclick="location.href='<?=ENV_ACCOUNT_DOMAIN?>/application/create';"
+                    onclick="location.href='<?=ENV_CONSOLE_DOMAIN?>/application/create';"
                     class="w3-border w3-border-gray w3-button w3-margin-left"
                 >
                    <i class="fa-solid fa-plus fa-padding-right"></i>
@@ -128,7 +128,7 @@
 
             <p>
                 You are logged in as 
-                <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/dashboard"><?=user_name($_user['id'])?></a>
+                <a href="<?=ENV_CONSOLE_DOMAIN?>/account/dashboard"><?=user_name($_user['id'])?></a>
             </p>
             <?php if($_user['github_username']): ?>
                 <p>
@@ -143,11 +143,11 @@
 
         <footer class="w3-container w3-center w3-light-grey w3-padding w3-border-top">
 
-            <a class="w3-button w3-border w3-white" href="<?=ENV_ACCOUNT_DOMAIN?>/account/dashboard">
+            <a class="w3-button w3-border w3-white" href="<?=ENV_CONSOLE_DOMAIN?>/account/dashboard">
                 <i class="fa-solid fa-user fa-padding-right "></i>
                 My Account
             </a>
-            <a class="w3-button w3-border w3-white" href="<?=ENV_ACCOUNT_DOMAIN?>/action/logout">
+            <a class="w3-button w3-border w3-white" href="<?=ENV_CONSOLE_DOMAIN?>/action/logout">
                 <i class="fa-solid fa-lock-open fa-padding-right "></i>
                 Logout
             </a>

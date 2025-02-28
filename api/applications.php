@@ -27,7 +27,7 @@ while($record = mysqli_fetch_assoc($result))
 
     $next['user']['first'] = $record2['first'];
     $next['user']['last'] = $record2['last'];
-    $next['user']['url'] = ENV_ACCOUNT_DOMAIN.'/profile/'.$record2['url'];
+    $next['user']['url'] = ENV_CONSOLE_DOMAIN.'/profile/'.$record2['url'];
     $next['user']['avatar'] = user_avatar($record2['id'], true);
     
     $applications[] = $next;

@@ -103,7 +103,7 @@ function security_check()
 
     if(!security_is_logged_in())
     {
-        header_redirect(ENV_ACCOUNT_DOMAIN.'/login');
+        header_redirect(ENV_CONSOLE_DOMAIN.'/login');
     }
 
     $id = security_decrypt($_COOKIE['hash_id']);

@@ -52,12 +52,12 @@ include('../templates/message.php');
         <li>Remove all GitHub access from your Faker account.</li>
         <li>
             Disable your Faker 
-            <a href="<?=ENV_ACCOUNT_DOMAIN?>/profile/<?=$_user['github_username']?>/">public profile</a>.
+            <a href="<?=ENV_CONSOLE_DOMAIN?>/profile/<?=$_user['github_username']?>/">public profile</a>.
         </li>
         <li>Prevent retrieving of Faker contribution stats.</li>
         <li>Not remove your GitHub avatar from your Faker account.</li>
     </ul>
-    <a href="<?=ENV_ACCOUNT_DOMAIN?>/action/github/user/revoke" class="w3-button w3-white w3-border">
+    <a href="<?=ENV_CONSOLE_DOMAIN?>/action/github/user/revoke" class="w3-button w3-white w3-border">
         <i class="fa-solid fa-xmark fa-padding-right"></i>
         Revoke GitHub Account Access
     </a>

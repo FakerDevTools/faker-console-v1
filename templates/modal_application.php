@@ -55,7 +55,7 @@ $result = mysqli_query($connect, $query);
       </table>
     </div>
     <footer class="w3-container w3-border-top w3-right-align w3-padding">
-      <a class="w3-button w3-white w3-border" href="<?=ENV_ACCOUNT_DOMAIN?>/application/create">
+      <a class="w3-button w3-white w3-border" href="<?=ENV_CONSOLE_DOMAIN?>/application/create">
         <i class="fa-solid fa-plus fa-padding-right"></i>
         Create Application
       </a>

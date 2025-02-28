@@ -4,7 +4,7 @@
 </p>
 
 <p>
-    <a href="<?=ENV_ACCOUNT_DOMAIN?>/action/verify/hash/<?=$data['verify_hash']?>">
-        <?=ENV_ACCOUNT_DOMAIN?>/action/verify/hash/<?=$data['verify_hash']?>
+    <a href="<?=ENV_CONSOLE_DOMAIN?>/action/verify/hash/<?=$data['verify_hash']?>">
+        <?=ENV_CONSOLE_DOMAIN?>/action/verify/hash/<?=$data['verify_hash']?>
     </a>
 </p>
