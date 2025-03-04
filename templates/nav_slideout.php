@@ -86,7 +86,7 @@ $navigation = navigation_array();
               </a>
               <div id="<?=$section['id']?>" style="display: <?php if(PAGE_SELECTED_SECTION == $section['id']): ?>block<?php else: ?>none<?php endif; ?>">
                 <?php foreach($section['pages'] as $page): ?>
-                  <a href="<?=ENV_CONSOLE_DOMAIN?><?=$page['url']?>" class="w3-bar-item w3-button<?php /*if(PAGE_SELECTED_SUB_PAGE == $page['url']): ?> bm-selected<?php endif; */ ?>" onclick="prevent(event);">
+                  <a href="<?=ENV_CONSOLE_DOMAIN?><?=$page['url']?>" class="w3-bar-item w3-button<?php if(PAGE_SELECTED_SUB_PAGE == $page['url']): ?> bm-selected<?php endif; ?>" onclick="prevent(event);">
                     <i class="fa-padding-right w3-text-dark-grey"></i>
                     <?=$page['title']?>
                   </a>

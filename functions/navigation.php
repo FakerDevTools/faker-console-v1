@@ -5,7 +5,6 @@ function navigation_array($selected = false)
 
     $navigation = [
        [
-            'icon' => 'bm-maps',
             'url' => '/pdfer/dashboard',
             'title' => 'PDFer',
             'id' => 'pdfer',
@@ -22,7 +21,6 @@ function navigation_array($selected = false)
                 ],
             ],
         ],[
-            'icon' => 'bm-places',
             'url' => '/images/dashboard',
             'title' => 'Images',
             'id' => 'images',
@@ -39,7 +37,6 @@ function navigation_array($selected = false)
                 ],
             ],
         ],[
-            'icon' => 'bm-roadview',
             'url' => '/charts/dashboard',
             'title' => 'Charts',
             'id' => 'charts',
@@ -58,19 +55,37 @@ function navigation_array($selected = false)
         ],[
             'br' => '---',
         ],[
-            'icon' => 'bm-trackview',
             'url' => '/keys/dashboard',
             'title' => 'API Keys',
             'id' => 'keys',
             'icon' => 'fa-solid fa-key',
-            'pages' => []
+            'pages' => [
+                [
+                    'title' => 'Dashboard',
+                    'url' => '/keys/dashboard',
+                    'colour' => 'red',
+                ],[
+                    'title' => 'Add Key',
+                    'url' => '/keys/add',
+                    'colour' => 'red',
+                ],
+            ],
         ],[
-            'icon' => 'bm-trackview',
             'url' => '/access/dashboard',
             'title' => 'IP Access',
             'id' => 'access',
             'icon' => 'fa-solid fa-server',
-            'pages' => []
+            'pages' => [
+                [
+                    'title' => 'Dashboard',
+                    'url' => '/keys/dashboard',
+                    'colour' => 'red',
+                ],[
+                    'title' => 'Add Key',
+                    'url' => '/keys/add',
+                    'colour' => 'red',
+                ],
+            ],
         ],
     ];
 
