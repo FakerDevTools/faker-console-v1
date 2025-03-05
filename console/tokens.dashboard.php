@@ -3,22 +3,47 @@
 security_check();
 admin_check();
 
-if (isset($_GET['delete'])) 
+if (isset($_GET['status'])) 
 {
 
-    die('here');
+    $query = 'SELECT status
+        FROM tokens 
+        WHERE id = '.$_GET['status'].'
+        AND application_id = '.$_application['id'].'
+        LIMIT 1';
+    $result = mysqli_query($connect, $query);    
 
-    $query = 'DELETE FROM roads 
-        WHERE id = '.$_GET['delete'].'
+    if(!mysqli_num_rows($result))
+    {
+        message_set('Status Error', 'There was an error while attempting to change the sattus or this token.', 'red');
+        header_redirect('/tokens/dashboard');
+    }
+
+    $token = mysqli_fetch_assoc($result);
+
+    $query = 'UPDATE tokens SET
+        status = "'.($token['status'] == 'active' ? 'inactive' : 'active').'"
+        WHERE id = '.$_GET['status'].'
+        AND application_id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    $query = 'DELETE FROM road_square 
-        WHERE road_id = '.$_GET['delete'];
+    message_set('Status Success', 'Token status has been updated.');
+    header_redirect('/tokens/dashboard');
+    
+}
+elseif (isset($_GET['delete'])) 
+{
+
+    $query = 'UPDATE tokens SET
+        deleted_at = NOW()
+        WHERE id = '.$_GET['delete'].'
+        AND application_id = '.$_application['id'].'
+        LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Delete Success', 'Road has been deleted.');
-    header_redirect('/roadview/roads');
+    message_set('Delete Success', 'Token has been deleted.');
+    header_redirect('/tokens/dashboard');
     
 }
 
@@ -39,7 +64,8 @@ include('../templates/message.php');
 $query = 'SELECT *
     FROM tokens
     WHERE application_id = "'.$_application['id'].'"
-    ORDER BY hash';
+    AND deleted_at IS NULL
+    ORDER BY name';
 $result = mysqli_query($connect, $query);
 
 ?>
@@ -51,7 +77,7 @@ $result = mysqli_query($connect, $query);
     Tokens
 </h1>
 <p>
-    <a href="/tokens/dashboard">Dashboard</a> / 
+    <a href="/application/dashboard">Dashboard</a> / 
     Tokens
 </p>
 
@@ -63,6 +89,7 @@ $result = mysqli_query($connect, $query);
     <tr>
         <th>Name</th>
         <th>Hash</th>
+        <th>Status</th>
         <th class="bm-table-icon"></th>
         <th class="bm-table-icon"></th>
     </tr>
@@ -74,6 +101,11 @@ $result = mysqli_query($connect, $query);
             </td>
             <td>
                 <?=string_show_hide($record['hash'])?>
+            </td>
+            <td>
+            <a href="#" onclick="return confirmModal('Are you sure you want to shange the status of <?=$record['name']?>?', '/tokens/dashboard/status/<?=$record['id']?>');">
+                    <?=$record['status']?>
+                </a>
             </td>
             <td>
                 <a href="/tokens/edit/<?=$record['id']?>">

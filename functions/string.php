@@ -1,10 +1,24 @@
 <?php
 
-function string_hash($length = 10)
+function string_hash($length = 10, $format = 'numeric')
 {
 
-    $length--;
-    return rand(pow(10, $length), pow(10, $length + 1) - 1);
+    if($format == 'numeric')
+    {
+        $length--;
+        return rand(pow(10, $length), pow(10, $length + 1) - 1);
+    }
+    elseif($format == 'alphanumeric')
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ12345689';
+        $hash = '';
+        for ($i = 0; $i < $length; $i++) 
+        {
+          $position = random_int(0, strlen($characters) -1);
+          $hash .= substr($characters, $position, 1);
+        }
+        return $hash;
+    }
 
 }
 

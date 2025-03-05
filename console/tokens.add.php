@@ -9,33 +9,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (!validate_blank($_POST['name']))
     {
-        message_set('Road Error', 'There was an error with the provided road.', 'red');
-        header_redirect('/roadview/roads/add');
+        message_set('Token Error', 'There was an error with the provided token.', 'red');
+        header_redirect('/tokens/add');
     }
     
-    $query = 'INSERT INTO roads (
+    $query = 'INSERT INTO tokens (
             name,
-            city_id,
+            hash,
+            application_id,
             created_at,
             updated_at
         ) VALUES (
             "'.addslashes($_POST['name']).'",
-            "'.$_city['id'].'",
+            "'.addslashes(string_hash(20, 'alphanumeric')).'",
+            "'.$_application['id'].'",
             NOW(),
             NOW()
         )';
     mysqli_query($connect, $query);
 
-    message_set('Tag Success', 'Your road has been added.');
-    header_redirect('/roadview/roads');
+    message_set('Token Success', 'Your token has been added.');
+    header_redirect('/tokens/dashboard');
     
 }
 
-define('APP_NAME', 'Road View');
+define('APP_NAME', 'Tokens');
 
-define('PAGE_TITLE', 'Add Road');
-define('PAGE_SELECTED_SECTION', 'geography');
-define('PAGE_SELECTED_SUB_PAGE', '/roadview/roads');
+define('PAGE_TITLE', 'Add Token');
+define('PAGE_SELECTED_SECTION', 'tokens');
+define('PAGE_SELECTED_SUB_PAGE', '/tokens/add');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
@@ -50,23 +52,18 @@ include('../templates/message.php');
 <!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
-    <img
-        src="https://cdn.brickmmo.com/icons@1.0.0/roadview.png"
-        height="50"
-        style="vertical-align: top"
-    />
-    Road View
+    <i class="fa-solid fa-key"></i>
+    Tokens
 </h1>
 <p>
-    <a href="/city/dashboard">Dashboard</a> / 
-    <a href="/roadview/dashboard">Road View</a> / 
-    <a href="/roadview/roads">Roads</a> / 
-    Add Road
+    <a href="/application/dashboard">Dashboard</a> / 
+    <a href="/tokens/dashboard">Tokens</a> / 
+    Add Token
 </p>
 
 <hr />
 
-<h2>Add Road</h2>
+<h2>Add Token</h2>
 
 <form
     method="post"
@@ -87,7 +84,7 @@ include('../templates/message.php');
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
         <i class="fa-solid fa-tag fa-padding-right"></i>
-        Add Road
+        Add Token
     </button>
 </form>
 
@@ -112,7 +109,7 @@ include('../templates/message.php');
 
 <?php
 
-include('../templates/modal_city.php');
+include('../templates/modal_application.php');
 
 include('../templates/main_footer.php');
 include('../templates/debug.php');
