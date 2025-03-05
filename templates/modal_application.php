@@ -61,7 +61,7 @@ $result = mysqli_query($connect, $query);
       </a>
       <button
         class="w3-button w3-white w3-border"
-        onclick="close_modal('application');"
+        onclick="closeModal('application');"
       >
         Close
       </button>

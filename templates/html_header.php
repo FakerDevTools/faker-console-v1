@@ -25,9 +25,6 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-    <!-- Script JavaScript File -->
-    <script src="/script.js"></script>
-
     <?php if(!isset($_SESSION['timezone'])): ?>
 
       <script>

@@ -13,7 +13,7 @@ $navigation = navigation_array();
         event.stopPropagation();
     }
 
-    function w3_toggle_sub(event, id) {
+    function w3ToggleSub(event, id) {
         let target = document.getElementById(id);
         let link = target.previousElementSibling;
         let icon = link.getElementsByTagName("i")[1];
@@ -23,7 +23,7 @@ $navigation = navigation_array();
             icon.classList.add("fa-caret-right");
             target.style.display = "none";
         } else {
-            w3_sidebar_close_all();
+            w3SidebarCloseAll();
             icon.classList.remove("fa-caret-right");
             icon.classList.add("fa-caret-down");
             target.style.display = "block";
@@ -33,7 +33,7 @@ $navigation = navigation_array();
         return false;
     }
 
-    function w3_sidebar_close_all() {
+    function w3SidebarCloseAll() {
         let down = document.querySelectorAll("#sidebar .fa-caret-down");
         for (let i = 0; i < down.length; i++) {
             down[i].classList.add("fa-caret-right");
@@ -78,7 +78,7 @@ $navigation = navigation_array();
               <a
                 class="w3-bar-item w3-button w3-text-red"
                 href="#"
-                onclick="w3_toggle_sub(event, '<?=$section['id']?>')"
+                onclick="w3ToggleSub(event, '<?=$section['id']?>')"
               >
                 <i class="<?=$section['icon']?> fa-padding-right w3-text-dark-grey"></i>
                 <?=$section['title']?>

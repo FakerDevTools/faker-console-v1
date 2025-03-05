@@ -13,7 +13,7 @@
         overlay.style.opacity = "0";
     };
 
-    function w3_sidebar_toggle(event) {
+    function w3SidebarToggle(event) {
         let sidebar = document.getElementById("sidebar");
         let overlay = document.getElementById("sidebarOverlay");
         let width = sidebar.getBoundingClientRect().width;
@@ -27,7 +27,7 @@
 
             setTimeout(function () {
             overlay.style.display = "none";
-            w3_sidebar_close_all();
+            w3SidebarCloseAll();
             }, 500);
         } else {
             sidebar.style.transition = "0.5s";
@@ -40,7 +40,7 @@
             overlay.style.opacity = "1";
             }, 0);
 
-            close_avatar_options();
+            closeAvatarOptions();
         }
 
         if(event)
@@ -62,7 +62,7 @@
 
         <div class="w3-col s6">
 
-            <button class="w3-button" onclick="w3_sidebar_toggle(event)">
+            <button class="w3-button" onclick="w3SidebarToggle(event)">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <a href="<?=ENV_CONSOLE_DOMAIN?>/application/dashboard" onclick="prevent(event)"
@@ -74,7 +74,7 @@
             <?php if($_application): ?>
                 <button
                     class="w3-border w3-border-gray w3-button w3-margin-left"
-                    onclick="open_modal('application')"
+                    onclick="openModal('application')"
                 >
                     <i class="fa-solid fa-server fa-padding-right"></i>
                     <?=$_application['name']?>
@@ -99,7 +99,7 @@
                 style="height: 35px"
                 class="w3-circle bm-pointer"
                 _onclick="return toggleAvatarOptions(event)"
-                onclick="open_modal('avatar-options');"
+                onclick="openModal('avatar-options');"
             />
       
             <!--
@@ -151,7 +151,7 @@
                 <i class="fa-solid fa-lock-open fa-padding-right "></i>
                 Logout
             </a>
-            <a class="w3-button w3-white w3-border w3-margin-top" onclick="close_modal('avatar-options');">
+            <a class="w3-button w3-white w3-border w3-margin-top" onclick="closeModal('avatar-options');">
                 Close
             </a>
             
@@ -169,12 +169,12 @@
         var avatarOptions = document.getElementById("avatar-options");
         if (avatarOptions.style.display == "block") 
         {
-            close_avatar_options();
+            closeAvatarOptions();
         } 
         else 
         { 
             avatarOptions.style.display = "block";
-            close_sidebar();
+            closeSidebar();
         }
 
         event.preventDefault();
@@ -186,35 +186,35 @@
 
         if(e.target.className == "w3-overlay" || e.target.className == "w3-modal")
         {
-            close_avatar_options();
-            close_sidebar();
-            close_all_modals();
+            closeAvatarOptions();
+            closeSidebar();
+            closeAllModals();
         }
 
     });
 
-    function close_all_modals()
+    function closeAllModals()
     {
 
         let modals = document.getElementsByClassName('w3-modal');
         for(var i = 0; i < modals.length; i++) 
         {
-            close_modal(modals[i].id);
+            closeModal(modals[i].id);
         }
 
     }
 
-    function close_sidebar()
+    function closeSidebar()
     {
 
         let sidebar = document.getElementById("sidebar");
         if (sidebar.style.left == "0px") {
-            w3_sidebar_toggle(false);
+            w3SidebarToggle(false);
         }
 
     }
 
-    function close_avatar_options()
+    function closeAvatarOptions()
     {
 
         var avatarOptions = document.getElementById("avatar-options");

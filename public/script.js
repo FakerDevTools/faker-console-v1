@@ -1,4 +1,4 @@
-function open_modal(id) {
+function openModal(id) {
   let modal = document.getElementById(id);
 
   modal.style.display = "block";
@@ -9,7 +9,7 @@ function open_modal(id) {
   }, 0);
 }
 
-function close_modal(id) {
+function closeModal(id) {
   let modal = document.getElementById(id);
 
   modal.style.transition = "0.5s";
@@ -19,3 +19,45 @@ function close_modal(id) {
     modal.style.display = "none";
   }, 500);
 }
+
+(function(){
+
+  const hideButton = document.getElementsByClassName('hide_button');
+  const showButton = document.getElementsByClassName('show_button');
+
+  for(let i = 0; i < hideButton.length; i ++)
+  {
+    hideButton[i].addEventListener("click", function(event){
+
+      this.parentNode.querySelectorAll(".hide_content")[0].style.display = "inline";
+      this.parentNode.querySelectorAll(".hide_button")[0].style.display = "none";
+      this.parentNode.querySelectorAll(".show_content")[0].style.display = "none";
+      this.parentNode.querySelectorAll(".show_button")[0].style.display = "inline";
+
+    });
+    showButton[i].addEventListener("click", function(event){
+
+      this.parentNode.querySelectorAll(".hide_content")[0].style.display = "none";
+      this.parentNode.querySelectorAll(".hide_button")[0].style.display = "inline";
+      this.parentNode.querySelectorAll(".show_content")[0].style.display = "inline";
+      this.parentNode.querySelectorAll(".show_button")[0].style.display = "none";
+
+    });
+
+    const copyButton = document.getElementsByClassName('copy_button');
+    copyButton[i].addEventListener("click", function(event){
+
+      var range = document.createRange();
+      range.selectNode(this);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      // window.getSelection().removeAllRanges();
+
+      confirmModal('Text has been copied to the clipboard');
+
+    });
+  }
+
+})();
+

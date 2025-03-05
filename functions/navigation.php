@@ -55,18 +55,18 @@ function navigation_array($selected = false)
         ],[
             'br' => '---',
         ],[
-            'url' => '/keys/dashboard',
-            'title' => 'API Keys',
-            'id' => 'keys',
+            'url' => '/tokens/dashboard',
+            'title' => 'API Tokens',
+            'id' => 'tokens',
             'icon' => 'fa-solid fa-key',
             'pages' => [
                 [
                     'title' => 'Dashboard',
-                    'url' => '/keys/dashboard',
+                    'url' => '/tokens/dashboard',
                     'colour' => 'red',
                 ],[
                     'title' => 'Add Key',
-                    'url' => '/keys/add',
+                    'url' => '/tokens/add',
                     'colour' => 'red',
                 ],
             ],
@@ -78,11 +78,11 @@ function navigation_array($selected = false)
             'pages' => [
                 [
                     'title' => 'Dashboard',
-                    'url' => '/keys/dashboard',
+                    'url' => '/access/dashboard',
                     'colour' => 'red',
                 ],[
                     'title' => 'Add Key',
-                    'url' => '/keys/add',
+                    'url' => '/access/add',
                     'colour' => 'red',
                 ],
             ],
@@ -101,12 +101,17 @@ function navigation_array($selected = false)
         foreach($navigation as $section)
         {
 
-            foreach($section['pages'] as $page)
+            if(isset($section['pages']))
             {
 
-                if(strpos($page['url'], $selected) === 0)
+                foreach($section['pages'] as $page)
                 {
-                    return $section;
+
+                    if(strpos($page['url'], $selected) === 0)
+                    {
+                        return $section;
+                    }
+
                 }
 
             }

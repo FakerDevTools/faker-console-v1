@@ -27,3 +27,17 @@ function string_is_base64($string)
     else return false;
 
 }
+
+function string_show_hide($hash)
+{
+
+    $html = '<div>
+            <span class="hide_content">'.str_repeat('*', strlen($hash)).'</span>
+            <span class="show_content copy_button" style="display:none;">'.$hash.'</span>
+            <a href="#" class="show_button">show</a>
+            <a href="#" class="hide_button" style="display:none;">hide</a>
+        </div>';
+
+    return $html;
+
+}

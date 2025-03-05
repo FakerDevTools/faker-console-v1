@@ -10,15 +10,15 @@
       <i class="fa-solid fa-chevron-right fa-padding-right"></i>
         Continue
       </a>
-      <button class="w3-button w3-white w3-border" onclick="close_modal('confirm');">
+      <button class="w3-button w3-white w3-border" onclick="closeModal('confirm');">
         Cancel
       </button>
     </footer>
   </div>
 </div>
 
-
 <script>
+
   function confirmModal(text, url)
   {
 
@@ -28,13 +28,17 @@
     confirmContent.innerHTML = text;
     confirmUrl.href = url;
 
-    open_modal('confirm');
+    openModal('confirm');
     return false;
 
   }
+
 </script>
 
 <script src="https://kit.fontawesome.com/ce455df547.js" crossorigin="anonymous"></script>
+
+<!-- Script JavaScript File -->
+<script src="/script.js"></script>
 
   </body>
 </html>
