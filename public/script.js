@@ -54,7 +54,7 @@ function closeModal(id) {
       document.execCommand("copy");
       // window.getSelection().removeAllRanges();
 
-      confirmModal('Text has been copied to the clipboard');
+      confirmModal('Text has been copied to the clipboard', false);
 
     });
   }

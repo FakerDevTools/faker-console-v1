@@ -7,11 +7,14 @@
     </div>
     <footer class="w3-container w3-border-top w3-right-align w3-padding">
       <a class="w3-button w3-white w3-border" href="" id="confirm-url">
-      <i class="fa-solid fa-chevron-right fa-padding-right"></i>
+        <i class="fa-solid fa-chevron-right fa-padding-right"></i>
         Continue
-      </a>
-      <button class="w3-button w3-white w3-border" onclick="closeModal('confirm');">
+      </a> 
+      <button class="w3-button w3-white w3-border" id="cancel-button" onclick="closeModal('confirm');">
         Cancel
+      </button> 
+      <button class="w3-button w3-white w3-border" id="close-button" onclick="closeModal('confirm');">
+        Close
       </button>
     </footer>
   </div>
@@ -24,11 +27,28 @@
 
     let confirmContent = document.getElementById('confirm-content');
     let confirmUrl = document.getElementById('confirm-url');
+    let cancelButton = document.getElementById('cancel-button');
+    let closeButton = document.getElementById('close-button');
 
     confirmContent.innerHTML = text;
-    confirmUrl.href = url;
+
+    if(url)
+    {
+      closeButton.style.display = "none";
+      cancelButton.style.display = "inline-block";
+      confirmUrl.style.display = "inline-block";
+
+      confirmUrl.href = url;
+    }
+    else
+    {
+      closeButton.style.display = "inline-block";
+      cancelButton.style.display = "none";
+      confirmUrl.style.display = "none";
+    }
 
     openModal('confirm');
+
     return false;
 
   }
