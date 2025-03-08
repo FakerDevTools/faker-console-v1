@@ -61,7 +61,11 @@ include('../templates/main_header.php');
 
 include('../templates/message.php');
 
-$query = 'SELECT *
+$query = 'SELECT *,(
+        SELECT COUNT(*)
+        FROM calls
+        WHERE calls.token_id = tokens.id
+    ) AS calls
     FROM tokens
     WHERE application_id = "'.$_application['id'].'"
     AND deleted_at IS NULL
@@ -89,6 +93,7 @@ $result = mysqli_query($connect, $query);
     <tr>
         <th>Name</th>
         <th>Hash</th>
+        <th class="bm-table-number">Calls</th>
         <th>Status</th>
         <th class="bm-table-icon"></th>
         <th class="bm-table-icon"></th>
@@ -101,6 +106,9 @@ $result = mysqli_query($connect, $query);
             </td>
             <td>
                 <?=string_show_hide($record['hash'])?>
+            </td>
+            <td>
+                <?=($record['calls'])?>
             </td>
             <td>
             <a href="#" onclick="return confirmModal('Are you sure you want to shange the status of <?=$record['name']?>?', '/tokens/dashboard/status/<?=$record['id']?>');">
