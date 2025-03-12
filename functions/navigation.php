@@ -81,8 +81,16 @@ function navigation_array($selected = false)
                     'url' => '/access/dashboard',
                     'colour' => 'red',
                 ],[
-                    'title' => 'Add Key',
+                    'title' => 'Add IP',
                     'url' => '/access/add',
+                    'colour' => 'red',
+                ],[
+                    'title' => 'Pending IPs',
+                    'url' => '/access/pending',
+                    'colour' => 'red',
+                ],[
+                    'title' => 'Blocks IPs',
+                    'url' => '/access/blocked',
                     'colour' => 'red',
                 ],
             ],

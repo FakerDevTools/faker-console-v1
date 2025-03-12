@@ -3,47 +3,18 @@
 security_check();
 admin_check();
 
-if (isset($_GET['status'])) 
+if (isset($_GET['delete'])) 
 {
 
-    $query = 'SELECT status
-        FROM tokens 
-        WHERE id = '.$_GET['status'].'
-        AND application_id = '.$_application['id'].'
-        LIMIT 1';
-    $result = mysqli_query($connect, $query);    
-
-    if(!mysqli_num_rows($result))
-    {
-        message_set('Status Error', 'There was an error while attempting to change the sattus or this token.', 'red');
-        header_redirect('/tokens/dashboard');
-    }
-
-    $token = mysqli_fetch_assoc($result);
-
-    $query = 'UPDATE tokens SET
-        status = "'.($token['status'] == 'active' ? 'inactive' : 'active').'"
-        WHERE id = '.$_GET['status'].'
-        AND application_id = '.$_application['id'].'
-        LIMIT 1';
-    mysqli_query($connect, $query);
-
-    message_set('Status Success', 'Token status has been updated.');
-    header_redirect('/tokens/dashboard');
-    
-}
-elseif (isset($_GET['delete'])) 
-{
-
-    $query = 'UPDATE tokens SET
+    $query = 'UPDATE ips SET
         deleted_at = NOW()
         WHERE id = '.$_GET['delete'].'
         AND application_id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Delete Success', 'Token has been deleted.');
-    header_redirect('/tokens/dashboard');
+    message_set('Delete Success', 'IP Address has been deleted.');
+    header_redirect('/access/dashboard');
     
 }
 
@@ -61,11 +32,16 @@ include('../templates/main_header.php');
 
 include('../templates/message.php');
 
-$query = 'SELECT *
-    FROM tokens
+$query = 'SELECT *,(
+        SELECT MAX(created_at)
+        FROM calls
+        WHERE calls.ip_id = ips.id
+        LIMIT 1
+    ) AS max_created_at
+    FROM ips
     WHERE application_id = "'.$_application['id'].'"
-    AND deleted_at IS NULL
-    ORDER BY name';
+    AND status = "allowed"
+    ORDER BY address';
 $result = mysqli_query($connect, $query);
 
 ?>
@@ -73,48 +49,37 @@ $result = mysqli_query($connect, $query);
 <!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
-    <i class="fa-solid fa-key"></i>
-    Tokens
+    <i class="fa-solid fa-server"></i>
+    IP Address Access
 </h1>
 <p>
     <a href="/application/dashboard">Dashboard</a> / 
-    Tokens
+    IP Access Access
 </p>
 
 <hr />
 
-<h2>Keys</h2>
+<h2>Approved IP Addresses</h2>
 
 <table class="w3-table w3-bordered w3-striped w3-margin-bottom">
     <tr>
-        <th>Name</th>
-        <th>Hash</th>
-        <th>Status</th>
-        <th class="bm-table-icon"></th>
+        <th>IP Address</th>
+        <th>Last Accessed</th>
         <th class="bm-table-icon"></th>
     </tr>
 
     <?php while($record = mysqli_fetch_assoc($result)): ?>
         <tr>
             <td>
-                <?=$record['name']?>
+                <?=$record['address']?>
             </td>
             <td>
-                <?=string_show_hide($record['hash'])?>
+                <?=date_ago($record['max_created_at'])?>
             </td>
             <td>
-            <a href="#" onclick="return confirmModal('Are you sure you want to shange the status of <?=$record['name']?>?', '/tokens/dashboard/status/<?=$record['id']?>');">
-                    <?=$record['status']?>
-                </a>
-            </td>
-            <td>
-                <a href="/tokens/edit/<?=$record['id']?>">
-                    <i class="fa-solid fa-pencil"></i>
-                </a>
-            </td>
-            <td>
-                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['name']?>?', '/tokens/dashboard/delete/<?=$record['id']?>');">
+                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['address']?>?', '/tokens/dashboard/delete/<?=$record['id']?>');">
                     <i class="fa-solid fa-trash-can"></i>
+                    TEST
                 </a>
             </td>
         </tr>
@@ -123,10 +88,10 @@ $result = mysqli_query($connect, $query);
 </table>
 
 <a
-    href="/tokens/add"
+    href="/access/add"
     class="w3-button w3-white w3-border"
 >
-    <i class="fa-solid fa-tag fa-padding-right"></i> Add New Token
+    <i class="fa-solid fa-tag fa-padding-right"></i> Add New IP Address
 </a>
 
 <?php
