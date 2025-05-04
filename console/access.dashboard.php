@@ -37,10 +37,17 @@ $query = 'SELECT *,(
         FROM calls
         WHERE calls.ip_id = ips.id
         LIMIT 1
-    ) AS max_created_at
+    ) AS max_created_at,(
+        SELECT COUNT(id)
+        FROM calls
+        WHERE calls.ip_id = ips.id
+        AND result = "success"
+        LIMIT 1
+    ) AS calls
     FROM ips
     WHERE application_id = "'.$_application['id'].'"
     AND status = "allowed"
+    AND deleted_at IS NULL
     ORDER BY address';
 $result = mysqli_query($connect, $query);
 
@@ -65,6 +72,7 @@ $result = mysqli_query($connect, $query);
     <tr>
         <th>IP Address</th>
         <th>Last Accessed</th>
+        <th>Calls</th>
         <th class="bm-table-icon"></th>
     </tr>
 
@@ -77,9 +85,11 @@ $result = mysqli_query($connect, $query);
                 <?=date_ago($record['max_created_at'])?>
             </td>
             <td>
-                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['address']?>?', '/tokens/dashboard/delete/<?=$record['id']?>');">
+                <?=$record['calls']?>
+            </td>
+            <td>
+                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['address']?>?', '/access/dashboard/delete/<?=$record['id']?>');">
                     <i class="fa-solid fa-trash-can"></i>
-                    TEST
                 </a>
             </td>
         </tr>

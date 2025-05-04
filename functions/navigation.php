@@ -89,7 +89,7 @@ function navigation_array($selected = false)
                     'url' => '/access/pending',
                     'colour' => 'red',
                 ],[
-                    'title' => 'Blocks IPs',
+                    'title' => 'Blocked IPs',
                     'url' => '/access/blocked',
                     'colour' => 'red',
                 ],
