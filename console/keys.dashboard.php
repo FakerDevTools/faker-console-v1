@@ -7,7 +7,7 @@ if (isset($_GET['status']))
 {
 
     $query = 'SELECT status
-        FROM tokens 
+        FROM keys 
         WHERE id = '.$_GET['status'].'
         AND application_id = '.$_application['id'].'
         LIMIT 1';
@@ -15,43 +15,43 @@ if (isset($_GET['status']))
 
     if(!mysqli_num_rows($result))
     {
-        message_set('Status Error', 'There was an error while attempting to change the sattus or this token.', 'red');
-        header_redirect('/tokens/dashboard');
+        message_set('Status Error', 'There was an error while attempting to change the sattus or this key.', 'red');
+        header_redirect('/keys/dashboard');
     }
 
-    $token = mysqli_fetch_assoc($result);
+    $key = mysqli_fetch_assoc($result);
 
-    $query = 'UPDATE tokens SET
-        status = "'.($token['status'] == 'active' ? 'inactive' : 'active').'"
+    $query = 'UPDATE keys SET
+        status = "'.($key['status'] == 'active' ? 'inactive' : 'active').'"
         WHERE id = '.$_GET['status'].'
         AND application_id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Status Success', 'Token status has been updated.');
-    header_redirect('/tokens/dashboard');
+    message_set('Status Success', 'Key status has been updated.');
+    header_redirect('/keys/dashboard');
     
 }
 elseif (isset($_GET['delete'])) 
 {
 
-    $query = 'UPDATE tokens SET
+    $query = 'UPDATE keys SET
         deleted_at = NOW()
         WHERE id = '.$_GET['delete'].'
         AND application_id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Delete Success', 'Token has been deleted.');
-    header_redirect('/tokens/dashboard');
+    message_set('Delete Success', 'Key has been deleted.');
+    header_redirect('/keys/dashboard');
     
 }
 
-define('APP_NAME', 'Tokens');
+define('APP_NAME', 'Keys');
 
 define('PAGE_TITLE', 'Dashboard');
-define('PAGE_SELECTED_SECTION', 'tokens');
-define('PAGE_SELECTED_SUB_PAGE', '/tokens/dashboard');
+define('PAGE_SELECTED_SECTION', 'keys');
+define('PAGE_SELECTED_SUB_PAGE', '/keys/dashboard');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
@@ -64,9 +64,9 @@ include('../templates/message.php');
 $query = 'SELECT *,(
         SELECT COUNT(*)
         FROM calls
-        WHERE calls.token_id = tokens.id
+        WHERE calls.key_id = keys.id
     ) AS calls
-    FROM tokens
+    FROM keys
     WHERE application_id = "'.$_application['id'].'"
     AND deleted_at IS NULL
     ORDER BY name';
@@ -78,11 +78,11 @@ $result = mysqli_query($connect, $query);
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <i class="fa-solid fa-key"></i>
-    Tokens
+    Keys
 </h1>
 <p>
     <a href="/application/dashboard">Dashboard</a> / 
-    Tokens
+    Keys
 </p>
 
 <hr />
@@ -111,17 +111,17 @@ $result = mysqli_query($connect, $query);
                 <?=($record['calls'])?>
             </td>
             <td>
-            <a href="#" onclick="return confirmModal('Are you sure you want to shange the status of <?=$record['name']?>?', '/tokens/dashboard/status/<?=$record['id']?>');">
+            <a href="#" onclick="return confirmModal('Are you sure you want to shange the status of <?=$record['name']?>?', '/keys/dashboard/status/<?=$record['id']?>');">
                     <?=$record['status']?>
                 </a>
             </td>
             <td>
-                <a href="/tokens/edit/<?=$record['id']?>">
+                <a href="/keys/edit/<?=$record['id']?>">
                     <i class="fa-solid fa-pencil"></i>
                 </a>
             </td>
             <td>
-                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['name']?>?', '/tokens/dashboard/delete/<?=$record['id']?>');">
+                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['name']?>?', '/keys/dashboard/delete/<?=$record['id']?>');">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
             </td>
@@ -131,10 +131,10 @@ $result = mysqli_query($connect, $query);
 </table>
 
 <a
-    href="/tokens/add"
+    href="/keys/add"
     class="w3-button w3-white w3-border"
 >
-    <i class="fa-solid fa-tag fa-padding-right"></i> Add New Token
+    <i class="fa-solid fa-tag fa-padding-right"></i> Add New Key
 </a>
 
 <?php

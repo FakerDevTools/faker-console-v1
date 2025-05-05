@@ -85,6 +85,11 @@ if(!count($parts))
 if($parts[0] == 'ajax')
 {
 
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST');
+    header("Access-Control-Allow-Headers: X-Requested-With");
+    header('Content-Type: application/json; charset=utf-8');
+
     define('PAGE_TYPE', 'ajax');
     array_shift($parts);
     $folder = 'ajax/';
@@ -109,12 +114,13 @@ elseif($parts[0] == 'action')
 elseif($domain == 'api')
 {
 
-    define('PAGE_TYPE', 'api');
-    $folder = 'api/';
-
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST');
     header("Access-Control-Allow-Headers: X-Requested-With");
+    header('Content-Type: application/json; charset=utf-8');
+
+    define('PAGE_TYPE', 'api');
+    $folder = 'api/';
 
 }
 
@@ -219,10 +225,6 @@ for($i = 0; $i < count($final_parts); $i += 2)
 if(PAGE_TYPE == 'ajax') 
 {
 
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST');
-    header("Access-Control-Allow-Headers: X-Requested-With");
-
     $_POST = json_decode(file_get_contents('php://input'), true);
     include('../ajax/'.PAGE_FILE);
     echo json_encode($data);
@@ -236,7 +238,50 @@ if(PAGE_TYPE == 'ajax')
 elseif(PAGE_TYPE == 'api') 
 {
 
-    include('../api/'.PAGE_FILE);
+    if(!isset($_GET['key']))
+    {
+
+        $data = array(
+            'message' => 'API key error. API key is missing.',
+            'error' => true, 
+        );
+
+    }
+    else
+    {
+
+        $key = $_GET['key'];
+        $ip_address = network_ip_address();
+    
+        api_call($key, $ip_address);
+
+        if(!api_key($key))
+        {
+
+            $data = array(
+                'message' => 'API key error. API key '.$key.' not permitted.',
+                'error' => true, 
+            );
+
+        }
+        elseif(!api_ip_address($ip_address, $key))
+        {
+
+            $data = array(
+                'message' => 'IP address error. IP address '.network_ip_address().' not permitted.',
+                'error' => true, 
+            );
+
+        }
+        else
+        {
+
+            include('../api/'.PAGE_FILE);
+            
+        }
+
+    }
+
     echo json_encode($data);
     exit;
 

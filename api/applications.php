@@ -9,13 +9,9 @@ $applications = array();
 
 while($record = mysqli_fetch_assoc($result))
 {
+
     $next['id'] = $record['id'];
     $next['name'] = $record['name'];
-    $next['url'] = ENV_CONSOLE_DOMAIN.'/profile/'.$record['url'];
-    $next['width'] = $record['width'];
-    $next['height'] = $record['height'];
-    $next['date_at'] = $record['date_at'];
-    $next['date_multiplier'] = $record['date_multiplier'];
     $next['avatar'] = application_avatar($record['id'], true);
 
     $query = 'SELECT * 
@@ -27,14 +23,14 @@ while($record = mysqli_fetch_assoc($result))
 
     $next['user']['first'] = $record2['first'];
     $next['user']['last'] = $record2['last'];
-    $next['user']['url'] = ENV_CONSOLE_DOMAIN.'/profile/'.$record2['url'];
     $next['user']['avatar'] = user_avatar($record2['id'], true);
     
     $applications[] = $next;
+
 }
 
 $data = array(
-    'message' => 'Cities retrieved successfully.',
+    'message' => 'Applications retrieved successfully.',
     'error' => false, 
     'applications' => $applications,
 );

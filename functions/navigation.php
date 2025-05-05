@@ -55,18 +55,18 @@ function navigation_array($selected = false)
         ],[
             'br' => '---',
         ],[
-            'url' => '/tokens/dashboard',
-            'title' => 'API Tokens',
-            'id' => 'tokens',
+            'url' => '/keys/dashboard',
+            'title' => 'API Keys',
+            'id' => 'keys',
             'icon' => 'fa-solid fa-key',
             'pages' => [
                 [
                     'title' => 'Dashboard',
-                    'url' => '/tokens/dashboard',
+                    'url' => '/keys/dashboard',
                     'colour' => 'red',
                 ],[
                     'title' => 'Add Key',
-                    'url' => '/tokens/add',
+                    'url' => '/keys/add',
                     'colour' => 'red',
                 ],
             ],

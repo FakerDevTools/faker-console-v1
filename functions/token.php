@@ -1,6 +1,6 @@
 <?php
 
-function token_fetch($identifier, $application = true)
+function key_fetch($identifier, $application = true)
 {
 
     if(!$identifier) return false;
@@ -8,7 +8,7 @@ function token_fetch($identifier, $application = true)
     global $connect, $_application;
 
     $query = 'SELECT *
-        FROM tokens
+        FROM keys
         WHERE id = "'.addslashes($identifier).'"
         '.($application ? 'AND application_id = "'.$_application['id'].'"' : '').'
         LIMIT 1';

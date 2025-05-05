@@ -3,43 +3,41 @@
 security_check();
 admin_check();
 
-if(
-    !isset($_GET['key']) || 
-    !is_numeric($_GET['key']) || 
-    !token_fetch($_GET['key']))
-{
-    message_set('Token Error', 'There was an error with the provided token.');
-    header_redirect('/tokens/dasnhoard');
-}
-elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 
     // Basic serverside validation
     if (!validate_blank($_POST['name']))
     {
-
-        message_set('Road Error', 'There was an error with the provided token.', 'red');
-        header_redirect('/tokens/dashbard');
+        message_set('Key Error', 'There was an error with the provided key.', 'red');
+        header_redirect('/keys/add');
     }
     
-    $query = 'UPDATE tokens SET
-        name = "'.addslashes($_POST['name']).'",
-        updated_at = NOW()
-        WHERE id = '.$_GET['key'].'
-        AND application_id = '.$_application['id'].'
-        LIMIT 1';
+    $query = 'INSERT INTO keys (
+            name,
+            hash,
+            application_id,
+            created_at,
+            updated_at
+        ) VALUES (
+            "'.addslashes($_POST['name']).'",
+            "'.addslashes(string_hash(20, 'alphanumeric')).'",
+            "'.$_application['id'].'",
+            NOW(),
+            NOW()
+        )';
     mysqli_query($connect, $query);
 
-    message_set('Token Success', 'Token has been updated.');
-    header_redirect('/tokens/dashboard');
+    message_set('KEy Success', 'Your key has been added.');
+    header_redirect('/keys/dashboard');
     
 }
 
-define('APP_NAME', 'Tokens');
+define('APP_NAME', 'Keys');
 
-define('PAGE_TITLE', 'Edit Token');
-define('PAGE_SELECTED_SECTION', 'tokens');
-define('PAGE_SELECTED_SUB_PAGE', '/tokens/dashboard');
+define('PAGE_TITLE', 'Add Key');
+define('PAGE_SELECTED_SECTION', 'keys');
+define('PAGE_SELECTED_SUB_PAGE', '/keys/add');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
@@ -49,25 +47,23 @@ include('../templates/main_header.php');
 
 include('../templates/message.php');
 
-$token = token_fetch($_GET['key']);
-
 ?>
 
 <!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <i class="fa-solid fa-key"></i>
-    Tokens
+    Keys
 </h1>
 <p>
     <a href="/application/dashboard">Dashboard</a> / 
-    <a href="/tokens/dashboard">Tokens</a> / 
-    Edit Token
+    <a href="/keys/dashboard">keys</a> / 
+    Add Key
 </p>
 
 <hr />
 
-<h2>Edit Token: <?=$token['name']?></h2>
+<h2>Add Key</h2>
 
 <form
     method="post"
@@ -81,7 +77,6 @@ $token = token_fetch($_GET['key']);
         type="text" 
         id="name" 
         autocomplete="off"
-        value="<?=$token['name']?>"
     />
     <label for="name" class="w3-text-gray">
         Name <span id="name-error" class="w3-text-red"></span>
@@ -89,7 +84,7 @@ $token = token_fetch($_GET['key']);
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
         <i class="fa-solid fa-tag fa-padding-right"></i>
-        Edit Token
+        Add Key
     </button>
 </form>
 
