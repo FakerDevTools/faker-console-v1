@@ -238,6 +238,7 @@ if(PAGE_TYPE == 'ajax')
 elseif(PAGE_TYPE == 'api') 
 {
 
+    // Check for a missing key
     if(!isset($_GET['key']))
     {
 
@@ -252,10 +253,8 @@ elseif(PAGE_TYPE == 'api')
 
         $key = $_GET['key'];
         $ip_address = network_ip_address();
-    
-        api_call($key, $ip_address);
 
-        if(!api_key($key))
+        if(!api_check_key($key))
         {
 
             $data = array(
@@ -264,7 +263,7 @@ elseif(PAGE_TYPE == 'api')
             );
 
         }
-        elseif(!api_ip_address($ip_address, $key))
+        elseif(!api_check_ip_address($ip_address, $key))
         {
 
             $data = array(

@@ -7,7 +7,7 @@ if (isset($_GET['status']))
 {
 
     $query = 'SELECT status
-        FROM keys 
+        FROM `keys` 
         WHERE id = '.$_GET['status'].'
         AND application_id = '.$_application['id'].'
         LIMIT 1';
@@ -21,7 +21,7 @@ if (isset($_GET['status']))
 
     $key = mysqli_fetch_assoc($result);
 
-    $query = 'UPDATE keys SET
+    $query = 'UPDATE `keys` SET
         status = "'.($key['status'] == 'active' ? 'inactive' : 'active').'"
         WHERE id = '.$_GET['status'].'
         AND application_id = '.$_application['id'].'
@@ -35,7 +35,7 @@ if (isset($_GET['status']))
 elseif (isset($_GET['delete'])) 
 {
 
-    $query = 'UPDATE keys SET
+    $query = 'UPDATE `keys` SET
         deleted_at = NOW()
         WHERE id = '.$_GET['delete'].'
         AND application_id = '.$_application['id'].'
@@ -66,7 +66,7 @@ $query = 'SELECT *,(
         FROM calls
         WHERE calls.key_id = keys.id
     ) AS calls
-    FROM keys
+    FROM `keys`
     WHERE application_id = "'.$_application['id'].'"
     AND deleted_at IS NULL
     ORDER BY name';

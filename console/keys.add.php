@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         header_redirect('/keys/add');
     }
     
-    $query = 'INSERT INTO keys (
+    $query = 'INSERT INTO `keys` (
             name,
             hash,
             application_id,

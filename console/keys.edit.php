@@ -22,7 +22,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         header_redirect('/keys/dashbard');
     }
     
-    $query = 'UPDATE keys SET
+    $query = 'UPDATE `keys` SET
         name = "'.addslashes($_POST['name']).'",
         updated_at = NOW()
         WHERE id = '.$_GET['key'].'

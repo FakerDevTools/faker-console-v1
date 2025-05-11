@@ -69,10 +69,16 @@ function ip_add($ip_address, $key)
             )';
         mysqli_query($connect, $query);
 
-        return true;
+        return mysqli_insert_id($connect);
 
     }
+    else
+    {
 
-    return false;
+        $record = mysqli_fetch_assoc($result);
+
+        return $record['id'];
+
+    }
 
 }

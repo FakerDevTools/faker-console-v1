@@ -1,6 +1,6 @@
 <?php
 
-function api_ip_address($ip_address, $key)
+function api_check_ip_address($ip_address, $key)
 {
 
     global $connect;
@@ -61,7 +61,7 @@ function api_ip_address($ip_address, $key)
 
 }
 
-function api_key($key)
+function api_check_key()
 {
 
     global $connect;
