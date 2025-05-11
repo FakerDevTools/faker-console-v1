@@ -14,7 +14,21 @@ if (isset($_GET['delete']))
     mysqli_query($connect, $query);
 
     message_set('Delete Success', 'IP Address has been deleted.');
-    header_redirect('/access/dashboard');
+    header_redirect('/access/blocked');
+    
+}
+elseif (isset($_GET['approve'])) 
+{
+
+    $query = 'UPDATE ips SET
+        status = "allowed"
+        WHERE id = '.$_GET['approve'].'
+        AND application_id = '.$_application['id'].'
+        LIMIT 1';
+    mysqli_query($connect, $query);
+
+    message_set('Approve Success', 'IP Address has been approved.');
+    header_redirect('/access/pending');
     
 }
 elseif (isset($_GET['block'])) 
@@ -27,16 +41,16 @@ elseif (isset($_GET['block']))
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Block Success', 'IP Address has been blocked.');
-    header_redirect('/access/dashboard');
+    message_set('Block Success', 'IP Address has been Block.');
+    header_redirect('/access/pending');
     
 }
 
 define('APP_NAME', 'Access');
 
-define('PAGE_TITLE', 'Dashboard');
+define('PAGE_TITLE', 'Pending IP Addresses');
 define('PAGE_SELECTED_SECTION', 'access');
-define('PAGE_SELECTED_SUB_PAGE', '/access/dashboard');
+define('PAGE_SELECTED_SUB_PAGE', '/access/pending');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
@@ -60,7 +74,7 @@ $query = 'SELECT *,(
     ) AS calls
     FROM ips
     WHERE application_id = "'.$_application['id'].'"
-    AND status = "allowed"
+    AND status = "pending"
     AND deleted_at IS NULL
     ORDER BY address';
 $result = mysqli_query($connect, $query);
@@ -75,18 +89,20 @@ $result = mysqli_query($connect, $query);
 </h1>
 <p>
     <a href="/application/dashboard">Dashboard</a> / 
-    IP Address Access
+    <a href="/access/dashboard">IP Address Access</a> / 
+    Pending IP Addresses
 </p>
 
 <hr />
 
-<h2>IP Address Access</h2>
+<h2>Pending IP Addresses</h2>
 
 <table class="w3-table w3-bordered w3-striped w3-margin-bottom">
     <tr>
         <th>IP Address</th>
         <th>Last Accessed</th>
         <th class="bm-table-number">Calls</th>
+        <th></th>
         <th></th>
         <th class="bm-table-icon"></th>
     </tr>
@@ -103,12 +119,17 @@ $result = mysqli_query($connect, $query);
                 <?=$record['calls']?>
             </td>
             <td>
-                <a href="#" onclick="return confirmModal('Are you sure you want to block <?=$record['address']?>?', '/access/dashboard/block/<?=$record['id']?>');">
+                <a href="#" onclick="return confirmModal('Are you sure you want to approve <?=$record['address']?>?', '/access/pending/approve/<?=$record['id']?>');">
+                    Approve IP
+                </a>
+            </td>
+            <td>
+                <a href="#" onclick="return confirmModal('Are you sure you want to block <?=$record['address']?>?', '/access/pending/block/<?=$record['id']?>');">
                     Block IP
                 </a>
             </td>
             <td class="bm-table-icon">
-                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['address']?>?', '/access/dashboard/delete/<?=$record['id']?>');">
+                <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['address']?>?', '/access/pending/delete/<?=$record['id']?>');">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
             </td>

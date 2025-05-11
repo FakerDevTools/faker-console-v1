@@ -14,29 +14,29 @@ if (isset($_GET['delete']))
     mysqli_query($connect, $query);
 
     message_set('Delete Success', 'IP Address has been deleted.');
-    header_redirect('/access/dashboard');
+    header_redirect('/access/blocked');
     
 }
-elseif (isset($_GET['block'])) 
+elseif (isset($_GET['approve'])) 
 {
 
     $query = 'UPDATE ips SET
-        status = "blocked"
-        WHERE id = '.$_GET['block'].'
+        status = "allowed"
+        WHERE id = '.$_GET['approve'].'
         AND application_id = '.$_application['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Block Success', 'IP Address has been blocked.');
-    header_redirect('/access/dashboard');
+    message_set('Approve Success', 'IP Address has been approved.');
+    header_redirect('/access/blocked');
     
 }
 
 define('APP_NAME', 'Access');
 
-define('PAGE_TITLE', 'Dashboard');
+define('PAGE_TITLE', 'Blocked IP Addresses');
 define('PAGE_SELECTED_SECTION', 'access');
-define('PAGE_SELECTED_SUB_PAGE', '/access/dashboard');
+define('PAGE_SELECTED_SUB_PAGE', '/access/blocked');
 
 include('../templates/html_header.php');
 include('../templates/nav_header.php');
@@ -60,7 +60,7 @@ $query = 'SELECT *,(
     ) AS calls
     FROM ips
     WHERE application_id = "'.$_application['id'].'"
-    AND status = "allowed"
+    AND status = "blocked"
     AND deleted_at IS NULL
     ORDER BY address';
 $result = mysqli_query($connect, $query);
@@ -75,12 +75,13 @@ $result = mysqli_query($connect, $query);
 </h1>
 <p>
     <a href="/application/dashboard">Dashboard</a> / 
-    IP Address Access
+    <a href="/access/dashboard">IP Address Access</a> / 
+    Block IP Addresses
 </p>
 
 <hr />
 
-<h2>IP Address Access</h2>
+<h2>Block IP Addresses</h2>
 
 <table class="w3-table w3-bordered w3-striped w3-margin-bottom">
     <tr>
@@ -103,8 +104,8 @@ $result = mysqli_query($connect, $query);
                 <?=$record['calls']?>
             </td>
             <td>
-                <a href="#" onclick="return confirmModal('Are you sure you want to block <?=$record['address']?>?', '/access/dashboard/block/<?=$record['id']?>');">
-                    Block IP
+                <a href="#" onclick="return confirmModal('Are you sure you want to approve <?=$record['address']?>?', '/access/blocked/approve/<?=$record['id']?>');">
+                    Approve IP
                 </a>
             </td>
             <td class="bm-table-icon">

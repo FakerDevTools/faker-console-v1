@@ -22,6 +22,8 @@ function date_ago($date)
 
     if(is_string($date)) $date = strtotime($date);
 
+    $now = time();
+
     $difference = $now - $date;
 
     /*

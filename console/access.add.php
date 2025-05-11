@@ -52,7 +52,7 @@ include('../templates/message.php');
 <!-- CONTENT -->
 
 <h1 class="w3-margin-top w3-margin-bottom">
-    <i class="fa-solid fa-key"></i>
+    <i class="fa-solid fa-server"></i>
     IP Address Access
 </h1>
 <p>
@@ -80,6 +80,19 @@ include('../templates/message.php');
     />
     <label for="address" class="w3-text-gray">
         IP Address <span id="address-error" class="w3-text-red"></span>
+    </label>
+
+    <select  
+        name="address" 
+        class="w3-input w3-border w3-margin-top" 
+        type="text" 
+        id="address"
+    >
+        <option value="allowed">Allowed</option>
+        <option value="blocked">Blocked</option>
+    </select>
+    <label for="address" class="w3-text-gray">
+        Status <span id="address-error" class="w3-text-red"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">

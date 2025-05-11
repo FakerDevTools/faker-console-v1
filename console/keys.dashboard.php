@@ -107,7 +107,7 @@ $result = mysqli_query($connect, $query);
             <td>
                 <?=string_show_hide($record['hash'])?>
             </td>
-            <td>
+            <td class="bm-table-number">
                 <?=($record['calls'])?>
             </td>
             <td>
@@ -115,12 +115,12 @@ $result = mysqli_query($connect, $query);
                     <?=$record['status']?>
                 </a>
             </td>
-            <td>
+            <td class="bm-table-icon">
                 <a href="/keys/edit/<?=$record['id']?>">
                     <i class="fa-solid fa-pencil"></i>
                 </a>
             </td>
-            <td>
+            <td class="bm-table-icon">
                 <a href="#" onclick="return confirmModal('Are you sure you want to delete <?=$record['name']?>?', '/keys/dashboard/delete/<?=$record['id']?>');">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
