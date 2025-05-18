@@ -163,7 +163,24 @@ if($final_file) define('PAGE_FILE', $final_file);
 if(!defined('PAGE_FILE'))
 {
 
-    include('404.php');
+    if(PAGE_TYPE == 'api')
+    {
+
+        $data = array(
+            'message' => 'API URL is invalid.',
+            'error' => true, 
+        );
+
+        api_call(false, false);
+
+        echo json_encode($data);
+
+    }
+    else
+    {
+        include('404.php');        
+    }
+
     exit;
 
 }
@@ -218,6 +235,8 @@ for($i = 0; $i < count($final_parts); $i += 2)
 
 }
 
+
+echo PAGE_TYPE;
 
 /**
  * If the request is an ajax request. 
@@ -274,6 +293,8 @@ elseif(PAGE_TYPE == 'api')
         }
         else
         {
+
+            api_call($key, $ip_address);
 
             include('../api/'.PAGE_FILE);
             

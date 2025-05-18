@@ -55,3 +55,10 @@ function string_show_hide($hash)
     return $html;
 
 }
+
+function string_url()
+{
+
+    return (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+}
