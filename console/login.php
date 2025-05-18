@@ -87,7 +87,7 @@ include('../templates/message.php');
         />
         <label for="email" class="w3-text-gray">
             <i class="fa-solid fa-envelope"></i> Email
-            <span id="email-error" class="w3-text-red"></span>
+            <span id="email-error" class="w3-text-blue"></span>
         </label>
     
         <input
@@ -100,7 +100,7 @@ include('../templates/message.php');
         />
         <label for="password" class="w3-text-gray">
             <i class="fa-solid fa-lock"></i> Password
-            <span id="password-error" class="w3-text-red"></span>
+            <span id="password-error" class="w3-text-blue"></span>
         </label>
         
 

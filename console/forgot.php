@@ -67,7 +67,7 @@ include('../templates/login_header.php');
         <input name="email" class="w3-input" type="email" id="email" autocomplete="off" />
         <label for="email" class="w3-text-gray">
             <i class="fa-solid fa-envelope"></i> Email
-            <span id="email-error" class="w3-text-red"></span>
+            <span id="email-error" class="w3-text-blue"></span>
         </label>
 
         <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">

@@ -76,7 +76,7 @@ $navigation = navigation_array();
           <?php else: ?>
 
               <a
-                class="w3-bar-item w3-button w3-text-red"
+                class="w3-bar-item w3-button w3-text-blue"
                 href="#"
                 onclick="w3ToggleSub(event, '<?=$section['id']?>')"
               >

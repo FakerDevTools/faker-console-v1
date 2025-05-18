@@ -6,7 +6,7 @@
   <div class="w3-center w3-margin-bottom">
     <a href="/">
       <img
-        src="https://cdn.brickmmo.com/images@1.0.0/brickmmo-logo-coloured.png"
+        src="https://cdn.faker.ca/images@1.0.0/faker-logo-coloured.png"
         alt="Faker Logo"
         style="width: 100px"
       />

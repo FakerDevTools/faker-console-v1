@@ -58,7 +58,7 @@ include('../templates/login_header.php');
         <input name="password" class="w3-input" type="password" id="password" autocomplete="off" />
         <label for="password" class="w3-text-gray">
             <i class="fa-solid fa-lock"></i> New Password
-            <span id="password-error" class="w3-text-red"></span>
+            <span id="password-error" class="w3-text-blue"></span>
         </label>
 
         <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">

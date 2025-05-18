@@ -67,7 +67,7 @@
             </button>
             <a href="<?=ENV_CONSOLE_DOMAIN?>/application/dashboard" onclick="prevent(event)"
             ><img
-                src="https://cdn.brickmmo.com/images@1.0.0/brickmmo-logo-coloured-horizontal.png"
+                src="https://cdn.faker.ca/images@1.0.0/faker-logo-coloured-horizontal.png"
                 style="height: 35px"
             /></a>
 
@@ -101,12 +101,7 @@
                 _onclick="return toggleAvatarOptions(event)"
                 onclick="openModal('avatar-options');"
             />
-      
-            <!--
-            <button class="w3-button" onclick="window.location='https://applications.brickmmo.com';">
-                <i class="fa-solid fa-grip-vertical"></i>
-            </button>
-            -->
+    
 
         </div>
 

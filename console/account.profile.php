@@ -51,7 +51,7 @@ include('../templates/message.php');
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
-        src="https://cdn.brickmmo.com/icons@1.0.0/bricksum.png"
+        src="https://cdn.faker.ca/icons@1.0.0/bricksum.png"
         height="50"
         style="vertical-align: top"
     />
@@ -80,7 +80,7 @@ include('../templates/message.php');
         value="<?=$_user['first']?>"
     />
     <label for="first" class="w3-text-gray">
-        First Name <span id="first-error" class="w3-text-red"></span>
+        First Name <span id="first-error" class="w3-text-blue"></span>
     </label>
 
     <input 
@@ -92,7 +92,7 @@ include('../templates/message.php');
         value="<?=$_user['last']?>"
     />
     <label for="last" class="w3-text-gray">
-        Last Name <span id="last-error" class="w3-text-red"></span>
+        Last Name <span id="last-error" class="w3-text-blue"></span>
     </label>
 
     <input 
@@ -105,7 +105,7 @@ include('../templates/message.php');
     />  
     <label for="email" class="w3-text-gray">
         <i class="fa-solid fa-envelope"></i>
-        Email <span id="email-error" class="w3-text-red"></span>
+        Email <span id="email-error" class="w3-text-blue"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateMainForm(); return false;">

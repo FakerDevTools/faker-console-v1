@@ -79,7 +79,7 @@ include('../templates/message.php');
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
-        src="https://cdn.brickmmo.com/icons@1.0.0/bricksum.png"
+        src="https://cdn.faker.ca/icons@1.0.0/bricksum.png"
         height="50"
         style="vertical-align: top"
     />
@@ -107,7 +107,7 @@ include('../templates/message.php');
         autocomplete="off"
     />
     <label for="name" class="w3-text-gray">
-        Name <span id="name-error" class="w3-text-red"></span>
+        Name <span id="name-error" class="w3-text-blue"></span>
     </label>
 
     <input 
@@ -119,7 +119,7 @@ include('../templates/message.php');
     />
     <label for="width" class="w3-text-gray">
         <i class="fa-solid fa-ruler"></i>
-        Width <span id="width-error" class="w3-text-red"></span>
+        Width <span id="width-error" class="w3-text-blue"></span>
     </label>
 
     <input 
@@ -131,7 +131,7 @@ include('../templates/message.php');
     />  
     <label for="height" class="w3-text-gray">
         <i class="fa-solid fa-ruler"></i>
-        Height <span id="height-error" class="w3-text-red"></span>
+        Height <span id="height-error" class="w3-text-blue"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">

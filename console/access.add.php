@@ -79,7 +79,7 @@ include('../templates/message.php');
         autocomplete="off"
     />
     <label for="address" class="w3-text-gray">
-        IP Address <span id="address-error" class="w3-text-red"></span>
+        IP Address <span id="address-error" class="w3-text-blue"></span>
     </label>
 
     <select  
@@ -92,7 +92,7 @@ include('../templates/message.php');
         <option value="blocked">Blocked</option>
     </select>
     <label for="address" class="w3-text-gray">
-        Status <span id="address-error" class="w3-text-red"></span>
+        Status <span id="address-error" class="w3-text-blue"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">

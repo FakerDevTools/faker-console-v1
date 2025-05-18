@@ -21,7 +21,7 @@ function github_revoke($access_token)
     $headers = [
         'Accept: application/vnd.github+json',
         "Authorization: Basic ". base64_encode(GITHUB_CLIENT_ID.':'.GITHUB_CLIENT_SECRET),
-        'User-Agent: BrickMMO',
+        'User-Agent: Faker',
     ];
 
     $data = [
@@ -72,7 +72,7 @@ function github_emails($access_token)
     $headers = [
         'Accept: application/json',
         'Authorization: Bearer '.$access_token,
-        'User-Agent: BrickMMO',
+        'User-Agent: Faker',
     ];
 
     $ch = curl_init();
@@ -95,7 +95,7 @@ function github_user($access_token)
     $headers = [
         'Accept: application/json',
         'Authorization: Bearer '.$access_token,
-        'User-Agent: BrickMMO',
+        'User-Agent: Faker',
     ];
 
     $ch = curl_init();
@@ -340,7 +340,7 @@ function github_scan_repo($account, $repo)
             $error_comments[] = 'README.md does not appear to have resources';
         }
 
-        if(!strpos($content, 'code-block.png') && !strpos($content, 'brickmmo-logo-coloured-horizontal.png'))
+        if(!strpos($content, 'code-block.png') && !strpos($content, 'faker-logo-coloured-horizontal.png'))
         {
             $errors['error_readme_contents'] = 0;
             $error_comments[] = 'README.md does not appear to have a footer image';

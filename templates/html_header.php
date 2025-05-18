@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
     <!-- Faker Exceptions -->
-    <link rel="stylesheet" href="https://cdn.brickmmo.com/exceptions@1.0.0/w3.css" />
-    <link rel="stylesheet" href="https://cdn.brickmmo.com/exceptions@1.0.0/fontawesome.css" />
+    <link rel="stylesheet" href="https://cdn.faker.ca/exceptions@1.0.0/w3.css" />
+    <link rel="stylesheet" href="https://cdn.faker.ca/exceptions@1.0.0/fontawesome.css" />
 
     <!-- Faker Icons -->
-    <link rel="stylesheet" href="https://cdn.brickmmo.com/fonticons@1.0.0/fonticons.css" />
+    <link rel="stylesheet" href="https://cdn.faker.ca/fonticons@1.0.0/fonticons.css" />
 
     <!--
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">

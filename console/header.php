@@ -50,7 +50,7 @@
 
     let linkExceptions = document.createElement("link");
     linkExceptions.href =
-      "https://cdn.brickmmo.com/exceptions@1.0.0/fontawesome.css";
+      "https://cdn.faker.ca/exceptions@1.0.0/fontawesome.css";
     linkExceptions.rel = "stylesheet";
     head.append(linkExceptions);
   }
@@ -74,12 +74,12 @@
   divMain.append(divLeft);
 
   let aAccount = document.createElement("a");
-  aAccount.href = "https://account.brickmmo.com/";
+  aAccount.href = "https://account.faker.com/";
   divLeft.append(aAccount);
 
   let logo = document.createElement("img");
   logo.src =
-    "https://cdn.brickmmo.com/images@1.0.0/brickmmo-logo-coloured-horizontal.png";
+    "https://cdn.faker.ca/images@1.0.0/faker-logo-coloured-horizontal.png";
   logo.style.height = "35px";
   logo.style.width = "112px";
   logo.verticalAlign = "middle";
@@ -93,7 +93,7 @@
   divMain.append(divRight);
 
   let aApps = document.createElement("a");
-  aApps.href = "https://account.brickmmo.com/apps";
+  aApps.href = "https://account.faker.ca/apps";
   divRight.append(aApps);
 
   let i = document.createElement("i");
@@ -110,7 +110,7 @@
   {
 
     let aUser = document.createElement("a");
-    aUser.href = "https://account.brickmmo.com/account/dashboard";
+    aUser.href = "https://account.faker.ca/account/dashboard";
     divRight.prepend(aUser);
 
     let avatar = document.createElement("img");

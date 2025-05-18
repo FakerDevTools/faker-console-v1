@@ -51,7 +51,7 @@ include('../templates/message.php');
 
 <h1 class="w3-margin-top w3-margin-bottom">
     <img
-        src="https://cdn.brickmmo.com/icons@1.0.0/bricksum.png"
+        src="https://cdn.faker.ca/icons@1.0.0/bricksum.png"
         height="50"
         style="vertical-align: top"
     />
@@ -80,7 +80,7 @@ include('../templates/message.php');
     />
     <label for="password" class="w3-text-gray">
         <i class="fa-solid fa-lock"></i>
-        Password <span id="password-error" class="w3-text-red"></span>
+        Password <span id="password-error" class="w3-text-blue"></span>
     </label>
 
     <input 
@@ -92,7 +92,7 @@ include('../templates/message.php');
     />
     <label for="password-confirm" class="w3-text-gray">
         <i class="fa-solid fa-lock"></i>
-        Confirm Password <span id="password-confirm-error" class="w3-text-red"></span>
+        Confirm Password <span id="password-confirm-error" class="w3-text-blue"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
