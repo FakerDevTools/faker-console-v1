@@ -22,32 +22,18 @@ function ip_fetch($identifier, $application = true)
 
 }
 
-function ip_add($ip_address, $key)
+function ip_add($ip_address)
 {
 
-    global $connect;
+    global $connect, $_key;
 
-    if(!$ip_address || !$key) return false;
+    if(!$ip_address) return false;
 
-    // Fetch key or return false
-    $query = 'SELECT application_id
-        FROM `keys`
-        WHERE hash = "'.$key.'"
-        AND deleted_at IS NULL';
-    $result = mysqli_query($connect, $query);
-
-    if(!mysqli_num_rows($result)) return false;
-
-    $record = mysqli_fetch_assoc($result);
-
-    $application_id = $record['application_id'];
-
-    // Fetch mathing IP record that has status allowed. If it does not exist
-    // add IP and return false.
+    // Fetch matching IP record. If it does not exist add IP.
     $query = 'SELECT id
         FROM ips
         WHERE address = "'.$ip_address.'"
-        AND application_id = "'.$application_id.'"
+        AND application_id = "'.$_kery['application_id'].'"
         LIMIT 1';
     $result = mysqli_query($connect, $query);
 
@@ -62,14 +48,16 @@ function ip_add($ip_address, $key)
                 updated_at
             ) VALUES (
                 "'.$ip_address.'",
-                "'.$application_id.'",
+                "'.$_key['application_id'].'",
                 "pending",
                 NOW(),
                 NOW()
             )';
         mysqli_query($connect, $query);
 
-        return mysqli_insert_id($connect);
+        $ip_id = mysqli_insert_id($connect);
+
+        return ip_fetch($ip_id, $_key['application_id']);
 
     }
     else
@@ -77,7 +65,7 @@ function ip_add($ip_address, $key)
 
         $record = mysqli_fetch_assoc($result);
 
-        return $record['id'];
+        return $record;
 
     }
 

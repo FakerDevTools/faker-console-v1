@@ -171,7 +171,7 @@ if(!defined('PAGE_FILE'))
             'error' => true, 
         );
 
-        api_call(false, false);
+        api_call(false, false, 'url');
 
         echo json_encode($data);
 
@@ -235,9 +235,6 @@ for($i = 0; $i < count($final_parts); $i += 2)
 
 }
 
-
-echo PAGE_TYPE;
-
 /**
  * If the request is an ajax request. 
  */
@@ -266,41 +263,75 @@ elseif(PAGE_TYPE == 'api')
             'error' => true, 
         );
 
+        api_call(false, false, 'url');
+
+        echo json_encode($data);
+        exit;
+
     }
     else
     {
 
-        $key = $_GET['key'];
-        $ip_address = network_ip_address();
+        $_key = api_check_key();
 
-        if(!api_check_key($key))
+        if(!$_key)
         {
 
             $data = array(
-                'message' => 'API key error. API key '.$key.' not permitted.',
+                'message' => 'API key error. API key '.$_GET['key'].' does not exist.',
                 'error' => true, 
             );
 
-        }
-        elseif(!api_check_ip_address($ip_address, $key))
-        {
+            api_call($_GET['key'], false, 'key');
 
-            $data = array(
-                'message' => 'IP address error. IP address '.network_ip_address().' not permitted.',
-                'error' => true, 
-            );
+            echo json_encode($data);
+            exit;
 
         }
-        else
+
+        $_application = application_fetch($_key['application_id']);
+
+        $_ip_address = api_check_ip_address();
+
+        /*
+        debug_pre($_ip_address);
+        debug_pre($_key);
+        */
+
+        if($_ip_address['status'] == 'pending' && $_ip_address['filtering'] == true)
         {
-
-            api_call($key, $ip_address);
-
-            include('../api/'.PAGE_FILE);
             
+            $data = array(
+                'message' => 'IP address error. IP address '.$_ip_address['address'].' is currently set to pending. Login to your console and approve IP address.',
+                'error' => true, 
+            );
+
+            api_call($_key['ip'], $_ip_address['id'], 'key');
+
+            echo json_encode($data);
+            exit;
+
+        }
+        elseif($_ip_address['status'] == 'blocked' && $_ip_address['filtering'] == true)
+        {
+
+            $data = array(
+                'message' => 'IP address error. IP address '.$_ip_address['address'].' is currently set to blocked. Login to your console and approve IP address.',
+                'error' => true, 
+            );
+
+            api_call($_key['ip'], $_ip_address['id'], 'key');
+
+            echo json_encode($data);
+            exit;
+
         }
 
     }
+
+    api_call($_key['id'], $_ip_address['id'], 'success');
+
+    include('../api/'.PAGE_FILE);
 
     echo json_encode($data);
     exit;

@@ -29,3 +29,10 @@ function network_ip_address()
     return $ip_address;
 
 }
+
+function network_url()
+{
+
+    return (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+}

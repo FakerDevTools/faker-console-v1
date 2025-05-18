@@ -1,30 +1,19 @@
 <?php
 
-function api_check_ip_address($ip_address, $key)
+function api_check_ip_address()
 {
 
-    global $connect;
+    global $connect, $_application, $_key;
 
-    if(!$ip_address) return false;
+    if(!$_key) return false;
 
-    // Fetch key or return false
-    $query = 'SELECT application_id
-        FROM `keys` 
-        WHERE hash = "'.$key.'"
-        AND deleted_at IS NULL';
-    $result = mysqli_query($connect, $query);
+    $ip_address = network_ip_address();
 
-    if(!mysqli_num_rows($result)) return false;
-
-    $record = mysqli_fetch_assoc($result);
-
-    $application_id = $record['application_id'];
-
-    // Check if there are any approved IPs, if there are none than no IP
+    // Check if there are any approved IPs, if there are none, no IP
     // proteection is in place. If there is at least one, check IP address.
-    $query = 'SELECT id
+    $query = 'SELECT *
         FROM ips
-        WHERE application_id = "'.$application_id.'"
+        WHERE application_id = "'.$_key['application_id'].'"
         AND status = "allowed"
         LIMIT 1';
     $result = mysqli_query($connect, $query);
@@ -32,78 +21,93 @@ function api_check_ip_address($ip_address, $key)
     if(!mysqli_num_rows($result))
     {
 
-        ip_add($ip_address, $key);
-        return true;
+        $record = ip_add($ip_address, $_key['id']);
+        $record['filtering'] = false;
+        return $record;
 
     }
 
     // Fetch mathing IP record that has status allowed. If it does not exist
     // add IP and return false.
-    $query = 'SELECT id
+    $query = 'SELECT *
         FROM ips
         WHERE address = "'.$ip_address.'"
-        AND application_id = "'.$application_id.'"
-        AND status = "allowed"
+        AND application_id = "'.$_application['id'].'"
         LIMIT 1';
     $result = mysqli_query($connect, $query);
 
     if(!mysqli_num_rows($result))
     {
         
-        ip_add($ip_address, $key);
-        return false;
+        $record = ip_add($ip_address, $key);
+        $record['filtering'] = true;
+        return $record;
 
     }
 
     $record = mysqli_fetch_assoc($result);
+    $record['filtering'] = true;
 
-    return $record['id'];
+    return $record;
 
 }
 
-function api_check_key($key)
+function api_check_key()
 {
 
     global $connect;
 
-    if(!$key) return false;
+    $key = isset($_GET['key']) ? $_GET['key'] : false;
 
-    $query = 'SELECT id
-        FROM `keys`
-        WHERE hash = "'.$key.'"
-        AND deleted_at IS NULL';
-    $result = mysqli_query($connect, $query);
+    if($key)
+    {
 
-    if(!mysqli_num_rows($result)) return false;
+        $query = 'SELECT *
+            FROM `keys`
+            WHERE hash = "'.$key.'"
+            AND deleted_at IS NULL';
+        $result = mysqli_query($connect, $query);
 
-    $record = mysqli_fetch_assoc($result);
+        if(mysqli_num_rows($result))
+        {
+            $key = mysqli_fetch_assoc($result);
+        }
+        else
+        {
+            $key = false;
+        }
 
-    return $record['id'];
+    }
+
+    return $key;
 
 }
 
-function api_call($key = false, $ip_address = false)
+function api_call($key = false, $ip_address = false, $result = 'success')
 {
 
     global $connect;
-
-    $result = 'success';
 
     if($key) $key = key_fetch($key, false);
-    elseif(isset($_GET['key'])) $key = key_fetch($_GET['key'], false);
 
     if(!is_array($key) or !count($key))
     {
-        $key = 0;
-        $result = 'key';
+        $key = array(
+            'id' => 0,
+            'hash' => ''
+        );
+        if($result == 'success') $result = 'key';
     }
 
     if($ip_address) $ip_address = ip_fetch($ip_address, false);
 
     if(!is_array($ip_address) or !count($ip_address)) 
     {
-        $ip_address = 0;
-        $result = 'ip';
+        $ip_address = array(
+            'id' => 0,
+            'address' => network_ip_address()
+        );
+        if($result == 'success') $result = 'ip';
     }
 
     $query = 'INSERT INTO calls (
@@ -116,7 +120,7 @@ function api_call($key = false, $ip_address = false)
             created_at,
             updated_at
         ) VALUES (
-            "'.string_url().'",
+            "'.network_url().'",
             "'.$ip_address['address'].'",
             "'.$key['hash'].'",
             "'.$ip_address['id'].'",
