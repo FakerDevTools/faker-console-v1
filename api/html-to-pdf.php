@@ -42,13 +42,70 @@ if(!network_valid($_GET['url']))
 
 }
 
+
+
 $pdf = Browsershot::url($_GET['url'])
     ->showBackground()
     ->noSandbox()
-    ->format('A4')
     ->setNodeBinary('/usr/local/bin/node')
-    ->setNpmBinary('/usr/local/bin/npm')
-    ->base64pdf();
+    ->setNpmBinary('/usr/local/bin/npm');
+
+if(isset($_GET['size']))
+{
+
+    if(!in_array($_GET['size'], pdf_sizes()))
+    {
+
+        $data = array(
+            'message' => 'Invalid parameter. API call /html-to-pdf requires a valid size parameter. Size appears to be invalid.',
+            'error' => true,
+        );
+
+        return;
+
+    }
+    else
+    {
+        $pdf->format($_GET['size']);
+    }
+
+}
+elseif(isset($_GET['width']) && isset($_GET['height']))
+{
+
+    if(!is_numeric($_GET['width']) || !is_numeric($_GET['height']) || $_GET['width'] <= 0 || $_GET['height'] <= 0)
+    {
+
+        $data = array(
+            'message' => 'Invalid parameter. API call /html-to-pdf requires a valid width and height parameter. Width and height do not appears to be valid.',
+            'error' => true,
+        );
+
+        return;
+
+    }
+    else
+    {
+        
+        $pdf->paperSize($_GET['width'], $_GET['height']);
+
+    }
+
+
+}
+else
+{
+
+    $data = array(
+        'message' => 'Invalid parameter. API call /html-to-pdf requires a valid size or width and height parameter. Neither appear to be provided.',
+        'error' => true,
+    );
+
+    return;
+
+}
+
+
 
 // header("Content-type:application/pdf");
 // header("Content-Disposition:filename=\"codeadam.ca.pdf\"");
@@ -56,6 +113,5 @@ $pdf = Browsershot::url($_GET['url'])
 $data = array(
     'message' => 'PDF generated successfully.',
     'error' => false, 
-    'pdf' => $pdf,
+    'pdf' => $pdf->base64pdf(),
 );
-
